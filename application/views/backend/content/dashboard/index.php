@@ -1,4 +1,11 @@
-
+      
+      <div class="br-pagetitle">
+        <i class="icon ion-ios-home-outline tx-70 lh-0"></i>
+        <div>
+          <h4><?= $header ?></h4>
+          
+        </div>
+      </div><!-- d-flex -->
 
       <div class="br-pagebody">
         <div class="row row-sm mg-b-20">

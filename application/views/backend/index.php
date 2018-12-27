@@ -33,6 +33,8 @@
     <link href="<?= base_url() ?>asset/app/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>asset/app/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>asset/app/lib/select2/css/select2.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>asset/app/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>asset/app/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>asset/app/css/bracket.css">
@@ -54,12 +56,34 @@
     <script src="<?= base_url() ?>asset/app/lib/echarts/echarts.min.js"></script>
     <script src="<?= base_url() ?>asset/app/lib/select2/js/select2.full.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyAq8o5-8Y5pudbJMJtDFzb8aHiWJufa5fg"></script>
-    <script src="<?= base_url() ?>lib/gmaps/gmaps.min.js"></script>
+    <script src="<?= base_url() ?>asset/app/lib/gmaps/gmaps.min.js"></script>
+    <script src="<?= base_url() ?>asset/app/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>asset/app/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>asset/app/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?= base_url() ?>asset/app/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
 
     <script src="<?= base_url() ?>asset/app/js/bracket.js"></script>
     <script src="<?= base_url() ?>asset/app/js/map.shiftworker.js"></script>
     <script src="<?= base_url() ?>asset/app/js/ResizeSensor.js"></script>
     <script src="<?= base_url() ?>asset/app/js/dashboard.dark.js"></script>
+
+    <script>
+      $(function(){
+        
+
+        $('#datatable1').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            
+          }
+        });
+        // Select2
+        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+      });
+    </script>
   </head>
 
   <body>
@@ -71,13 +95,7 @@
         
       ?>
      <div class="br-mainpanel">
-      <div class="br-pagetitle">
-        <i class="icon ion-ios-home-outline tx-70 lh-0"></i>
-        <div>
-          <h4>Dashboard</h4>
-          <p class="mg-b-0">Do bigger things with Bracket plus, the responsive bootstrap 4 admin template.</p>
-        </div>
-      </div><!-- d-flex -->
+     
 
       <?php
         include str_replace("system", "application/views/backend/", BASEPATH)."/layout/content.php";

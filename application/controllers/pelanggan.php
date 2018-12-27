@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Pelanggan extends CI_Controller {
 
     function __construct(){
         parent::__construct();
@@ -11,9 +11,9 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-        $data['title'] = "Dashboard Prima Comp";
-        $data['header'] = "Dashboard";
-        $data['content'] = "teknisi/index";
+        $data['title'] = "Prima Comp";
+        $data['header'] = "Data Pelanggan";
+        $data['content'] = "pelanggan/index";
 		$this->load->view('backend/index',$data);
 		
 	}
