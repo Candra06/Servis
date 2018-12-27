@@ -13,7 +13,7 @@ class Dashboard extends CI_Controller {
 	{
         $data['title'] = "Dashboard Prima Comp";
         $data['header'] = "Dashboard";
-        $data['content'] = "teknisi/index";
+        $data['content'] = "dashboard/index";
 		$this->load->view('backend/index',$data);
 		
 	}

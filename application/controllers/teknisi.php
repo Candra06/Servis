@@ -16,5 +16,12 @@ class Teknisi extends CI_Controller {
         $data['content'] = "teknisi/index";
 		$this->load->view('backend/index',$data);
 		
-	}
+    }
+    
+    public function add(){
+        $data['title'] = "Prima Comp";
+        $data['header'] = "Data Teknisi";
+        $data['content'] = "teknisi/add";
+		$this->load->view('backend/index',$data);
+    }
 }

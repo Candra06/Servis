@@ -16,5 +16,13 @@ class Pelanggan extends CI_Controller {
         $data['content'] = "pelanggan/index";
 		$this->load->view('backend/index',$data);
 		
-	}
+    }
+    
+    public function add()
+    {
+        $data['title'] = "Prima Comp";
+        $data['header'] = "Data Pelanggan";
+        $data['content'] = "pelanggan/add";
+		$this->load->view('backend/index',$data); 
+    }
 }

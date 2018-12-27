@@ -1,15 +1,18 @@
       
       <div class="br-pagetitle">
         <i class="icon ion-ios-home-outline tx-70 lh-0"></i>
-        <div>
-          <h4><?= $header ?></h4>
-          
-        </div>
+          <div class="" style="width: 90%;">
+            <h4><?= $header ?></h4>
+          </div>
+          <div style="width: 15%; float: right;">
+            <a href="<?= base_url('teknisi')?>/add" style="width: 120px; margin-right:5px;" class="btn btn-primary btn-block mg-b-5"><i class="fa fa fa-plus mg-r-10"> </i>Add Data</a>   
+          </div>  
       </div><!-- d-flex -->
+
 
       <div class="br-pagebody">
       <div class="table-wrapper responsive">
-            <table id="datatable1" class="table display responsive ">
+            <table id="datatable1" class="table responsive display">
               <thead>
                 <tr>
                   <th class="wd-10p">Kode Teknisi</th>
@@ -29,7 +32,8 @@
                   <td>2011/04/25</td>
                   <td>$320,800</td>
                   <td>$320,800</td>
-                  <td>t.nixon@datatables.net</td>
+                  <td><button type="" class="btn btn-primary btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-pencil-alt"></i></div></button> 
+                      <button type="" class="btn btn-danger btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-trash"></i></div></button></td>
                 </tr>
                 
               </tbody>
