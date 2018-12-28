@@ -61,8 +61,10 @@
     <script src="<?= base_url() ?>asset/app/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
     <script src="<?= base_url() ?>asset/app/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="<?= base_url() ?>asset/app/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>asset/app/lib/select2/js/select2.min.js"></script>
 
     <script src="<?= base_url() ?>asset/app/js/bracket.js"></script>
+    <script src="<?= base_url() ?>asset/app/lib/highlightjs/highlight.pack.min.js"></script>
     <script src="<?= base_url() ?>asset/app/js/map.shiftworker.js"></script>
     <script src="<?= base_url() ?>asset/app/js/ResizeSensor.js"></script>
     <script src="<?= base_url() ?>asset/app/js/dashboard.dark.js"></script>
@@ -90,9 +92,7 @@
 
       <?php
         include str_replace("system", "application/views/backend/", BASEPATH)."/layout/head.php";
-        include str_replace("system", "application/views/backend/", BASEPATH)."/layout/sidebar.php";
-        
-        
+        include str_replace("system", "application/views/backend/", BASEPATH)."/layout/sidebar.php"; 
       ?>
      <div class="br-mainpanel">
      
