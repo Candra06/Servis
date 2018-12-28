@@ -11,6 +11,16 @@
 
 
       <div class="br-pagebody">
+      <?php
+            if(isset($_SESSION['message'])){
+              echo "<div style='margin-top:20px' class='alert alert-".$_SESSION['message'][0]."'>
+                ".$_SESSION['message'][1]."
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                  <span aria-hidden='true'>&times;</span>
+                </button>
+              </div>";
+            }
+          ?>
       <div class="table-wrapper responsive">
             <table id="datatable1" class="table responsive display">
               <thead>
@@ -25,17 +35,22 @@
                 </tr>
               </thead>
               <tbody>
+                <?php
+                  foreach ($data as $d){
+                ?>
                 <tr>
-                  <td>Tiger</td>
-                  <td>Nixon</td>
+                  <td><?= $d['kd_user']?></td>
+                  <td><?= $d['nama']?></td>
                   
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                  <td>$320,800</td>
-                  <td><button type="" class="btn btn-primary btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-pencil-alt"></i></div></button> 
-                      <button type="" class="btn btn-danger btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-trash"></i></div></button></td>
+                  <td><?= $d['no_hp']?></td>
+                  <td><?= $d['email']?></td>
+                  <td><?= $d['status']?></td>
+                  <td>
+                    <a href="<?= base_url().$this->uri->segment(1)."/edit/$d[kd_user]"?>"><button type="" class="btn btn-primary btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-pencil-alt"></i></div></button></a> 
+                    <a href="<?= base_url().$this->uri->segment(1)."/delete/$d[kd_user]"?>"><button type="" class="btn btn-danger btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-trash"></i></div></button></a>
+                  </td>
                 </tr>
-                
+                <?php } ?>
               </tbody>
             </table>
           </div><!-- table-wrapper -->
