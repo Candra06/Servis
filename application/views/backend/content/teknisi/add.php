@@ -11,47 +11,45 @@
           <h6 class="br-section-label">Input Data Teknisi</h6>
           <p class="br-section-text">A form with a label on top of each form control.</p>
 
-         
-
           <div class="form-layout form-layout-1">
             <form action="" method="post" enctype="multipart/form-data">
             <div class="row mg-b-25">
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Kode Teknisi: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" name="kd_user" value="<?= $kode_user ?>" placeholder="Kode Teknisi" disabled>
+                  <input class="form-control form-control-dark" type="text" name="kd_user" value="<?php  if( $data == null){ echo $kode_user; } else { echo Input_helper::postOrOr('kd_user', $data['kd_user']); } ?>" placeholder="Kode Teknisi" required disabled>
                   <!-- <input class="form-control form-control-dark" type="hidden" name="kd_user" value="<?= Input_helper::postOrOr('kd_user', $data['kd_user']) ?>" placeholder="Kode Teknisi" disabled> -->
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Nama Lengkap: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" name="nama" value="<?= Input_helper::postOrOr('nama', $data['nama']) ?>" placeholder="Masukkan Nama Lengkap">
+                  <input class="form-control form-control-dark" type="text" name="nama" value="<?= Input_helper::postOrOr('nama', $data['nama']) ?>" placeholder="Masukkan Nama Lengkap" required>
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Nomor Telp: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="number" name="no_hp" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Masukkan Masukkan No HP">
+                  <input class="form-control form-control-dark" type="number" name="no_hp" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Masukkan Masukkan No HP" required>
                 </div>
               </div><!-- col-4 -->
 
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" name="email" value="<?= Input_helper::postOrOr('email', $data['email']) ?>" placeholder="Masukkan Email">
+                  <input class="form-control form-control-dark" type="text" name="email" value="<?= Input_helper::postOrOr('email', $data['email']) ?>" placeholder="Masukkan Email" required>
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Password: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="password" name="password" value="" placeholder="Masukkan Password">
+                  <input class="form-control form-control-dark" type="password" name="password" value="" placeholder="Masukkan Password" required>
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Level: <span class="tx-danger">*</span></label>
-                  <select name="level" class="form-control select2 form-control-dark" data-placeholder="Pilih Level">
+                  <select name="level" class="form-control select2 form-control-dark" data-placeholder="Pilih Level" required>
                     <option label="Level"></option>
                     <option value="1">Admin</option>
                     <option value="2">Teknisi</option>
@@ -63,13 +61,13 @@
               <div class="col-lg-8">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Alamat: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" name="alamat" value="<?= Input_helper::postOrOr('alamat', $data['alamat']) ?>" placeholder="Masukkan Alamat">
+                  <input class="form-control form-control-dark" type="text" name="alamat" value="<?= Input_helper::postOrOr('alamat', $data['alamat']) ?>" placeholder="Masukkan Alamat" required>
                 </div>
               </div><!-- col-8 -->
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Status: <span class="tx-danger">*</span></label>
-                  <select name="status" class="form-control select2 form-control-dark" data-placeholder="Pilih Status">
+                  <select name="status" class="form-control form-control-dark" data-placeholder="Pilih Status" required>
                     <option label="Status"></option>
                     <option value="1">Aktif</option>
                     <option value="0">Banned</option>
