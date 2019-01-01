@@ -44,16 +44,12 @@ class Teknisi extends CI_Controller {
             $date = date('Y-m-d H:i:s');
             $kode_user = $this->mTeknisi->kode();
             $array = [
-                'kd_user' => $kode_user,
+                'kd_teknisi' => $kode_user,
                 'nama' => $p['nama'],
                 'alamat' => $p['alamat'],
-                'level' => $p['level'],
-                'email' => $p['email'],
                 'no_hp' => $p['no_hp'],
-                'password' => $p['password'],
-                'status' => $p['status'],
                 'create_by' => 1,
-                'create_date' => $date
+                'create_at' => $date
             ];
 
             $this->mTeknisi->insert($array);
@@ -70,7 +66,7 @@ class Teknisi extends CI_Controller {
         $data['title'] = "Prima Comp";
         $data['header'] = "Ubah Data Teknisi";
         $data['content'] = "teknisi/add";
-        $data['data'] = $this->db->get_where("tb_user", ['kd_user' => $kode])->row_array();
+        $data['data'] = $this->db->get_where("teknisi", ['kd_teknisi' => $kode])->row_array();
 		$this->load->view('backend/index',$data);
     }
 
@@ -81,13 +77,9 @@ class Teknisi extends CI_Controller {
             $array = [
                 'nama' => $p['nama'],
                 'alamat' => $p['alamat'],
-                'level' => $p['level'],
-                'email' => $p['email'],
                 'no_hp' => $p['no_hp'],
-                'password' => $p['password'],
-                'status' => $p['status'],
                 'modified_by' => 1,
-                'modified_date' => $date
+                'modified_at' => $date
             ];
             $this->mTeknisi->updateData($array, $kode);
             $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);

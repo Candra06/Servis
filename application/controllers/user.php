@@ -1,70 +1,76 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pelanggan extends CI_Controller {
+class User extends CI_Controller {
 
     function __construct(){
         parent::__construct();
         $this->load->helper("Response_Helper");
         $this->load->helper("Input_helper");
         $this->load->helper('url');
-        $this->load->model("mPelanggan");
+        $this->load->model("mUser");
         if ($this->uri->segment(2) == "add" && $_SERVER['REQUEST_METHOD'] == "POST") {
             $this->input();
         } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
             $this->update($this->uri->segment(3));
         }
+        
     }
 
 	public function index()
 	{
-        $this->load->model("mPelanggan");
-        $data['data'] = $this->mPelanggan->tampilData();
+        $this->load->model("muser");
+        $data['data'] = $this->mUser->tampilData();
         $data['title'] = "Prima Comp";
-        $data['header'] = "Data Pelanggan";
-        $data['content'] = "pelanggan/index";
-		$this->load->view('backend/index',$data);		
+        $data['header'] = "Data User";
+        $data['content'] = "user/index";
+		$this->load->view('backend/index',$data);
+		
     }
     
-    public function add()
-    {
-        $data['kode_pelanggan'] = $this->mPelanggan->kode();
-        $data['data'] = null;
+    public function add(){
+        $data['kode_user'] = $this->mUser->kode();
         $data['title'] = "Prima Comp";
-        $data['header'] = "Data Pelanggan";
-        $data['content'] = "pelanggan/add";
-		$this->load->view('backend/index',$data); 
+        $data['header'] = "Data User";
+        $data['content'] = "user/add";
+        $data['data'] = null;
+		$this->load->view('backend/index',$data);
     }
 
     public function input(){
         $p = $_POST;
-
+        
         try{
             $date = date('Y-m-d H:i:s');
-            $kode_user = $this->mPelanggan->kode(); 
+            $kode_user = $this->mUser->kode();
             $array = [
-                'kd_pelanggan' => $kode_user,
+                'kd_user' => $kode_user,
                 'nama' => $p['nama'],
-                'alamat' => $p['alamat'],
+                'level' => $p['level'],
+                'email' => $p['email'],
+                'password' => $p['password'],
+                'status' => $p['status'],
                 'no_hp' => $p['no_hp'],
-                'pekerjaan' => $p['pekerjaan'],
+                'alamat' => $p['alamat'],
                 'create_by' => 1,
                 'create_date' => $date
             ];
-            $this->mPelanggan->insert($array);
+
+            $this->muser->insert($array);
             $this->session->set_flashdata("message", ['success', 'Berhasil input data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
+            redirect(base_url("user"));
         }catch (Exception $e){
-            $this->session->set_flashdata("message", ['danger', 'gagal input data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
+            $this->session->set_flashdata("message", ['danger', 'Gagal'.$this->uri->segment(1)]);
+            $this->add();
         }
     }
 
-    public function edit($kode){       
+    public function edit($kode){
+        
         $data['title'] = "Prima Comp";
-        $data['header'] = "Ubah Data Pelanggan";
-        $data['content'] = "pelanggan/add";
-        $data['data'] = $this->db->get_where("pelanggan", ['kd_pelanggan' => $kode])->row_array();
+        $data['header'] = "Ubah Data user";
+        $data['content'] = "user/add";
+        $data['data'] = $this->db->get_where("user", ['kd_user' => $kode])->row_array();
 		$this->load->view('backend/index',$data);
     }
 
@@ -74,29 +80,33 @@ class Pelanggan extends CI_Controller {
         try{
             $array = [
                 'nama' => $p['nama'],
-                'alamat' => $p['alamat'],
+                'level' => $p['level'],
+                'email' => $p['email'],
                 'no_hp' => $p['no_hp'],
-                'pekerjaan' => $p['pekerjaan'],
+                'alamat' => $p['alamat'],
+                'password' => $p['password'],
+                'status' => $p['status'],
                 'modified_by' => 1,
                 'modified_date' => $date
             ];
-            $this->mPelanggan->updateData($array, $kode);
+            $this->mUser->updateData($array, $kode);
             $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
+            redirect(base_url("user"));
         }catch(Exception $e){
             $this->session->set_flashdata("message", ['danger', 'Gagal update data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
+            redirect(base_url("user"));
         }
     }
 
     public function delete($kode){
         try{
-            $this->mPelanggan->deleteData($kode);
+            $this->muser->deleteData($kode);
             $this->session->set_flashdata("message", ['success', 'Berhasil hapus data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
+            redirect(base_url("user"));
         }catch(Exceptio $e){
             $this->session->set_flashdata("message", ['danger', 'Gagal input data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
+            redirect(base_url("user"));
         }
     }
+
 }

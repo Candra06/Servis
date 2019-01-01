@@ -4,19 +4,25 @@
       <label class="sidebar-label">Navigation</label>
       <ul class="br-sideleft-menu">
         <li class="br-menu-item">
-          <a href="<?= base_url();?>dashboard" class="br-menu-link active">
+          <a href="<?= base_url();?>dashboard" class="br-menu-link <?= (($this->uri->segment(1) == 'dashboard' ? 'active' : ''))?>">
             <i class="menu-item-icon icon ion-ios-home-outline tx-24"></i>
             <span class="menu-item-label">Dashboard</span>
           </a><!-- br-menu-link -->
         </li><!-- br-menu-item -->
         <li class="br-menu-item">
-          <a href="<?= base_url('teknisi') ?>" class="br-menu-link">
+          <a href="<?= base_url('teknisi') ?>" class="br-menu-link <?= (($this->uri->segment(1) == 'teknisi' ? 'active' : ''))?>">
             <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
             <span class="menu-item-label">Data Teknisi</span>
           </a><!-- br-menu-link -->
         </li><!-- br-menu-item -->
         <li class="br-menu-item">
-          <a href="<?= base_url('pelanggan') ?>" class="br-menu-link">
+          <a href="<?= base_url('user') ?>" class="br-menu-link <?= (($this->uri->segment(1) == 'user' ? 'active' : ''))?>">
+            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
+            <span class="menu-item-label">Data User</span>
+          </a><!-- br-menu-link -->
+        </li><!-- br-menu-item -->
+        <li class="br-menu-item">
+          <a href="<?= base_url('pelanggan') ?>" class="br-menu-link <?= (($this->uri->segment(1) == 'pelanggan' ? 'active' : ''))?>">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
             <span class="menu-item-label">Data Pelanggan</span>
           </a><!-- br-menu-link -->
@@ -34,14 +40,14 @@
           </ul>
         </li><!-- br-menu-item -->
         <li class="br-menu-item">
-          <a href="#" class="br-menu-link with-sub">
+          <a href="#" class="br-menu-link with-sub <?= (($this->uri->segment(1) == 'servis' ? 'active' : ''))?>">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
             <span class="menu-item-label">Transaksi</span>
           </a><!-- br-menu-link -->
           <ul class="br-menu-sub">
             <li class="sub-item"><a href="chart-morris.html" class="sub-link">Pembelian Stok</a></li>
             <li class="sub-item"><a href="chart-flot.html" class="sub-link">Penjualan</a></li>
-            <li class="sub-item"><a href="chart-chartjs.html" class="sub-link">Jasa Servis</a></li>
+            <li class="sub-item"><a href="<?= base_url('servis') ?>" class="sub-link <?= (($this->uri->segment(1) == 'servis' ? 'active' : ''))?>">Jasa Servis</a></li>
           </ul>
         </li><!-- br-menu-item -->
       </ul><!-- br-sideleft-menu -->
