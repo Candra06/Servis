@@ -8,7 +8,7 @@ class Servis extends CI_Controller {
         $this->load->helper("Response_Helper");
         $this->load->helper("Input_helper");
         $this->load->helper('url');
-        $this->load->model("mTeknisi");
+        $this->load->model("mServis");
         if ($this->uri->segment(2) == "add" && $_SERVER['REQUEST_METHOD'] == "POST") {
             $this->input();
         } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
@@ -19,19 +19,19 @@ class Servis extends CI_Controller {
 
 	public function index()
 	{
-        $this->load->model("mTeknisi");
-        $data['data'] = $this->mTeknisi->tampilData();
+        $this->load->model("mServis");
+        $data['data'] = $this->mServis->tampilData();
         $data['title'] = "Prima Comp";
-        $data['header'] = "Data Teknisi";
+        $data['header'] = "Data Servis";
         $data['content'] = "servis/index";
 		$this->load->view('backend/index',$data);
 		
     }
     
     public function add(){
-        $data['kode_user'] = $this->mTeknisi->kode();
+        $data['kode_user'] = $this->mServis->kode();
         $data['title'] = "Prima Comp";
-        $data['header'] = "Data Teknisi";
+        $data['header'] = "Data Servis";
         $data['content'] = "servis/add";
         $data['data'] = null;
 		$this->load->view('backend/index',$data);
@@ -42,7 +42,7 @@ class Servis extends CI_Controller {
         
         try{
             $date = date('Y-m-d H:i:s');
-            $kode_user = $this->mTeknisi->kode();
+            $kode_user = $this->mServis->kode();
             $array = [
                 'kd_teknisi' => $kode_user,
                 'nama' => $p['nama'],

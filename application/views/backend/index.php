@@ -35,6 +35,7 @@
     <link href="<?= base_url() ?>asset/app/lib/select2/css/select2.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>asset/app/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>asset/app/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>asset/app/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>asset/app/css/bracket.css">
@@ -62,6 +63,7 @@
     <script src="<?= base_url() ?>asset/app/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="<?= base_url() ?>asset/app/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
     <script src="<?= base_url() ?>asset/app/lib/select2/js/select2.min.js"></script>
+    
 
     <script src="<?= base_url() ?>asset/app/js/bracket.js"></script>
     <script src="<?= base_url() ?>asset/app/lib/highlightjs/highlight.pack.min.js"></script>

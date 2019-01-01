@@ -40,13 +40,13 @@
           </ul>
         </li><!-- br-menu-item -->
         <li class="br-menu-item">
-          <a href="#" class="br-menu-link with-sub <?= (($this->uri->segment(1) == 'servis' ? 'active' : ''))?>">
+          <a href="#" class="br-menu-link with-sub <?= (($this->uri->segment(1) == 'servis' || $this->uri->segment(1) == 'pembelian' || $this->uri->segment(1) == 'penjualan' ? 'active' : ''))?>">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
             <span class="menu-item-label">Transaksi</span>
           </a><!-- br-menu-link -->
           <ul class="br-menu-sub">
-            <li class="sub-item"><a href="chart-morris.html" class="sub-link">Pembelian Stok</a></li>
-            <li class="sub-item"><a href="chart-flot.html" class="sub-link">Penjualan</a></li>
+            <li class="sub-item"><a href="<?= base_url('pembelian') ?>" class="sub-link <?= (($this->uri->segment(1) == 'pembelian' ? 'active' : ''))?>">Pembelian Stok</a></li>
+            <li class="sub-item"><a href="<?= base_url('penjualan') ?>" class="sub-link <?= (($this->uri->segment(1) == 'penjualan' ? 'active' : ''))?>">Penjualan</a></li>
             <li class="sub-item"><a href="<?= base_url('servis') ?>" class="sub-link <?= (($this->uri->segment(1) == 'servis' ? 'active' : ''))?>">Jasa Servis</a></li>
           </ul>
         </li><!-- br-menu-item -->
