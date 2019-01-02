@@ -50,7 +50,7 @@
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                 <label class="form-control-label">Level: <span class="tx-danger">*</span></label>
-                <select class="form-control form-control-dark select-2" name="level" placeholder="Pilih Status">
+                <select class="form-control form-control-dark select-2" id="level" name="level" placeholder="Pilih Status">
                     <option value="">Pilih Level</option>
                     <option value="1">Admin</option>
                     <option value="2">Teknisi</option>
@@ -69,7 +69,7 @@
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                 <label class="form-control-label">Status: <span class="tx-danger">*</span></label>
-                  <select class="form-control form-control-dark select-2" name="status" placeholder="Pilih Status">
+                  <select class="form-control form-control-dark select-2" id="status" name="status" placeholder="Pilih Status">
                     <option value="">Pilih Status</option>
                     <option value="1">Aktif</option>
                     <option value="0">Banned</option>
@@ -103,15 +103,15 @@
         });
 
         // Select2
-        $('#select2-a, #select2-b').select2({
+        $('#level, #status').select2({
           minimumResultsForSearch: Infinity
         });
 
-        $('#select2-a').on('select2:opening', function (e) {
+        $('#level').on('select2:opening', function (e) {
           $(this).closest('.form-group').addClass('form-group-active');
         });
 
-        $('#select2-a').on('select2:closing', function (e) {
+        $('#status').on('select2:closing', function (e) {
           $(this).closest('.form-group').removeClass('form-group-active');
         });
 

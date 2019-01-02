@@ -30,6 +30,8 @@ class Servis extends CI_Controller {
     
     public function add(){
         $data['kode_user'] = $this->mServis->kode();
+        $data['kode_pelanggan'] = $this->mServis->kode_pelanggan();
+        $data['dataPelanggan'] = $this->mServis->tampilPelanggan();
         $data['title'] = "Prima Comp";
         $data['header'] = "Data Servis";
         $data['content'] = "servis/add";

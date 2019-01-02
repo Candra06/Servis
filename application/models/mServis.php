@@ -12,6 +12,11 @@ class mServis extends CI_Model{
         return $ada;
     }
 
+    public function tampilPelanggan(){
+        $q = $this->db->query("SELECT * FROM pelanggan");
+        return $q->result_array();
+    }
+
     public function kode(){
         $q = $this->db->query("SELECT MAX(RIGHT(kd_transaksi,4)) as kode FROM transaksi_servis", false);
         $kd = "";
@@ -23,11 +28,33 @@ class mServis extends CI_Model{
         } else {
             $kd = "01";
         }
-        $kode = "TS".$kd;
+        $kode = "TS".date('dmy').$kd;
         $data = array(
             'kd_transaksi' => $kode
         );
         return $kode;
+    }
+
+    public function kode_pelanggan(){
+        $q = $this->db->query("SELECT MAX(RIGHT(kd_pelanggan,3)) as kode FROM pelanggan", false);
+        $kd = "";
+        if ($q->num_rows() > 0) {
+            foreach ($q->result() as $k){
+                $tmp = ((int)$k->kode)+1;
+                $kd = sprintf("%03s", $tmp);
+            }
+        } else {
+            $kd = "001";
+        }
+        $kode = "KP".$kd;
+        $data = array(
+            'kd_pelanggan' => $kode
+        );
+        return $kode;
+    }
+
+    public function cek_pelanggan(){
+
     }
 
     public function insert($array){
