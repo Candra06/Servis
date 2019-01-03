@@ -103,4 +103,9 @@ class Servis extends CI_Controller {
         }
     }
 
+    public function dtPelanggan(){
+        $data = $this->mServis->pelanggan();
+        echo json_encode($data);
+    }
+
 }

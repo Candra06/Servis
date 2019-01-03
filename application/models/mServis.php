@@ -17,6 +17,12 @@ class mServis extends CI_Model{
         return $q->result_array();
     }
 
+    public function pelanggan(){
+        $kd = $this->input->post('get_option');
+        $q = $this->db->query("SELECT * FROM pelanggan WHERE kd_pelanggan='$kd'");
+        return $q->result_array();
+    }
+
     public function kode(){
         $q = $this->db->query("SELECT MAX(RIGHT(kd_transaksi,4)) as kode FROM transaksi_servis", false);
         $kd = "";

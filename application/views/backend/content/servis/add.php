@@ -53,7 +53,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Nama Pelanggan <span class="tx-danger">*</span></label>
-                  <select class="form-control form-control-dark select-2" id="pelanggan" name="jenis" placeholder="Pilih Status">
+                  <select class="form-control form-control-dark select-2" id="pelanggan" name="jenis" placeholder="Pilih Status" onchange="java_script_:getPelanggan(this.options[this.selectedIndex].value)">
                     <option value="">Pilih Pelanggan</option>
                     <?php foreach ($dataPelanggan as $dp) {?>
                     <option value="<?= $dp['kd_pelanggan'];?>"><?= $dp['nama']?></option>
@@ -98,7 +98,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Nama Barang: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" id="nama_barang" name="nama_barang" value="<?= Input_helper::postOrOr('nama', $data['nama']);  ?>" placeholder="Masukkan Nama Barang" required disabled>
+                  <input class="form-control form-control-dark" type="text" id="nama_barang" name="nama_barang" value="<?= Input_helper::postOrOr('nama', $data['nama']);  ?>" placeholder="Masukkan Nama Barang" required>
                   <input class="form-control form-control-dark" type="hidden" id="kd_barang" name="kd_barang" value="<?= Input_helper::postOrOr('kd_barang', $data['kd_barang']) ?>" placeholder="Kode Teknisi" disabled>
                 </div>
               </div><!-- col-4 -->
@@ -230,5 +230,37 @@
         });
 
       });
+
+      function getPelanggan(select_item){
+        $.ajax({
+          type: 'post',
+          url: '<?= base_url()."Servis/dtPelanggan"?>',
+          dataType: 'JSON',
+          data: {
+            get_option:select_item
+          },
+          success: function(response){
+            document.getElementById('kd_pelanggan').value=response[0].kd_pelanggan;
+            document.getElementById('pekerjaan').value=response[0].pekerjaan;
+            document.getElementById('alamat').value=response[0].alamat;
+            document.getElementById('no_hp').value=response[0].no_hp;
+            document.getElementById('kd_pelanggan').disabled = true;
+            document.getElementById('pekerjaan').disabled = true;
+            document.getElementById('alamat').disabled = true;
+            document.getElementById('no_hp').disabled = true;
+          },error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert("Status: "+textStatus);
+            alert("Error: "+errorThrown);
+          }
+        })
+      }
+
+      function simpanData(){
+        var no_trans      = "<?= $kode_user ;?>";
+        var tgl_trans     = $('#tgl_transaksi').val();
+        var kdPelanggan   = $('#kd_pelanggan').val();
+        var kdBarang      = $('#kd_baranng').val();
+        
+      }
     </script>
      
