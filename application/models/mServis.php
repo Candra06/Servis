@@ -59,6 +59,24 @@ class mServis extends CI_Model{
         return $kode;
     }
 
+    public function kode_barang(){
+        $q = $this->db->query("SELECT MAX(RIGHT(kd_barang,2)) as kode FROM barang_servis", false);
+        $kd = "";
+        if ($q->num_rows() > 0) {
+            foreach ($q->result() as $k){
+                $tmp = ((int)$k->kode)+1;
+                $kd = sprintf("%02s", $tmp);
+            }
+        } else {
+            $kd = "01";
+        }
+        $kode = "BR".date('dm').$kd;
+        $data = array(
+            'kd_barang' => $kode
+        );
+        return $kode;
+    }
+
     public function cek_pelanggan(){
 
     }
@@ -76,6 +94,51 @@ class mServis extends CI_Model{
         $this->db->where('kd_teknisi', $kode);
         $this->db->delete('teknisi');
         return true;
+    }
+
+    public function simpan_transaksi(){
+        $date = date('Y-m-d H:i:s');
+        $data = array(
+            'kd_transaksi' => $this->input->post('no_trans'),
+            'tgl_transaksi' => $this->input->post('tgl_trans'),
+            'kd_pelanggan' => $this->input->post('kdPelanggan'),
+            'created_by' => $this->input->post('teknisi'),
+            'date_created' => $date,
+            'status' => 0
+        );
+
+        $data2 = array(
+            'kd_transaksi' => $this->input->post('no_trans'),
+            'kd_barang' => $this->input->post('kdBarang'),
+            'status' => 0,
+            'tgl_terima' => $this->input->post('terima'),
+            'tgl_selesai' => $this->input->post('selesai'),
+            'kerusakan' => $this->input->post('kerusakan'),
+            'created_by' => $this->input->post('teknisi'),
+            'created_at' => $date,
+        );
+
+        $barang = array(
+            'kd_barang' => $this->input->post('kdBarang'),
+            'nama' => $this->input->post('namaBarang'),
+            'kd_pelanggan' => $this->input->post('kdPelanggan'),
+            'jenis' => $this->input->post('jenis'),
+            'spesifikasi' => $this->input->post('spek'),
+            'nomor_seri' => $this->input->post('no_seri'),
+            'kondisi' => $this->input->post('kerusakan'),
+        );
+
+        $result = $this->db->insert('transaksi_servis', $data);
+        $simpanDetail = $this->db->insert('detail_servis', $data2);
+        $simpanBarang = $this->db->insert('barang_servis', $barang);
+
+        $d = array();
+        if ($result && $simpanBarang && $simpanDetail){
+            $d = ['respons' => 'berhasil transaksi'];
+        }else{
+            $d = ['respons' => 'gagal transaksi'];
+        }
+        return $d;
     }
 }
 ?>

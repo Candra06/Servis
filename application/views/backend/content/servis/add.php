@@ -99,13 +99,13 @@
                 <div class="form-group">
                   <label class="form-control-label">Nama Barang: <span class="tx-danger">*</span></label>
                   <input class="form-control form-control-dark" type="text" id="nama_barang" name="nama_barang" value="<?= Input_helper::postOrOr('nama', $data['nama']);  ?>" placeholder="Masukkan Nama Barang" required>
-                  <input class="form-control form-control-dark" type="hidden" id="kd_barang" name="kd_barang" value="<?= Input_helper::postOrOr('kd_barang', $data['kd_barang']) ?>" placeholder="Kode Teknisi" disabled>
+                  <input class="form-control form-control-dark" type="hidden" id="kd_barang" name="kd_barang" value="<?php  if( $data == null){ echo $kode_barang; } else { echo Input_helper::postOrOr('kd_barang', $data['kd_barang']); } ?>" placeholder="Kode Teknisi" disabled>
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Jenis: <span class="tx-danger">*</span></label>
-                  <select class="form-control form-control-dark select-2" id="jenis" name="jenis" placeholder="Pilih Status">
+                  <select class="form-control form-control-dark select-2" id="jenis" name="jenis" onchange="java_script_:jenisBarang(this.options[this.selectedIndex].value)" placeholder="Pilih Status">
                     <option value="">Pilih Jenis Barang</option>
                     <option value="1">Laptop</option>
                     <option value="2">PC</option>
@@ -139,7 +139,7 @@
                 <textarea rows="2" id="keterangan" name="keterangan" class="form-control form-control-dark" placeholder="Masukkan Keterangan"></textarea>
                 </div>
               </div><!-- col-4 -->
-              <div class="col-lg-4">
+              <div class="col-lg-4" id="kelengkapanSelect" style="display:none;visibility: hiddden;">
                 <div class="form-group">
                   <label class="form-control-label">Kelengkapan: <span class="tx-danger">*</span></label>
                   <label class="ckbox">
@@ -189,7 +189,7 @@
 
 
             <div class="form-layout-footer">
-              <button class="btn btn-primary" id="simpan">Submit</button>
+              <button class="btn btn-primary" id="simpan" onclick="java_script_:simpanData()">Submit</button>
               <button class="btn btn-secondary">Cancel</button>
             </div><!-- form-layout-footer -->
         
@@ -255,12 +255,56 @@
         })
       }
 
+      function jenisBarang(select_item){
+        if(select_item == "1"){
+          document.getElementById("kelengkapanSelect").style.visibility = 'visible';
+          document.getElementById("kelengkapanSelect").style.display = 'block';
+        }else{
+          document.getElementById("kelengkapanSelect").style.display = 'none';
+          document.getElementById("kelengkapanSelect").style.visibility = 'hidden';
+        }
+        
+      }
+
       function simpanData(){
-        var no_trans      = "<?= $kode_user ;?>";
+        var no_trans      = $('#kd_transaksi').val();
         var tgl_trans     = $('#tgl_transaksi').val();
         var kdPelanggan   = $('#kd_pelanggan').val();
-        var kdBarang      = $('#kd_baranng').val();
-        
+        var kdBarang      = $('#kd_barang').val();
+        var jenis         = $('#jenis').val();
+        var terima        = $('#tgl_terima').val();
+        var selesai       = $('#tgl_selesai').val();   
+        var kerusakan     = $('#kerusakan').val();
+        var keterangan    = $('#keterangan').val();
+        var spek          = $('#spek').val();
+        var no_seri       = $('#no_seri').val();
+        var namaBarang    = $('#nama_barang').val();
+        var teknisi       = $('#teknisi').val();
+
+        $.ajax({      //simpan ke tabel transaksi servis
+          type: "POST",
+          url: '<?= base_url() ?>Servis/simpanTransaksi',
+          dataType: "JSON",
+          data: {
+            no_trans: no_trans,
+            tgl_trans: tgl_trans,
+            kdPelanggan: kdPelanggan,
+            teknisi: teknisi,
+            kdBarang: kdBarang,     //simpan ke tabel barang
+            namaBarang: namaBarang,
+            jenis: jenis,
+            spek: spek,
+            no_seri: no_seri,
+            keterangan: keterangan,   //simpan ke tabel transaksi detail
+            terima: terima,
+            selesai: selesai,
+            kerusakan: kerusakan
+          },success: function(data){
+            console.log(data);
+          },error: function(data){
+            console.log(data);
+          }
+        })
       }
     </script>
      

@@ -31,6 +31,7 @@ class Servis extends CI_Controller {
     public function add(){
         $data['kode_user'] = $this->mServis->kode();
         $data['kode_pelanggan'] = $this->mServis->kode_pelanggan();
+        $data['kode_barang'] = $this->mServis->kode_barang();
         $data['dataPelanggan'] = $this->mServis->tampilPelanggan();
         $data['title'] = "Prima Comp";
         $data['header'] = "Data Servis";
@@ -105,6 +106,11 @@ class Servis extends CI_Controller {
 
     public function dtPelanggan(){
         $data = $this->mServis->pelanggan();
+        echo json_encode($data);
+    }
+
+    public function simpanTransaksi(){
+        $data = $this->mServis->simpan_transaksi();
         echo json_encode($data);
     }
 
