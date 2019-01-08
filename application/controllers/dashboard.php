@@ -7,6 +7,9 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         $this->load->helper("Response_Helper");
         $this->load->helper('url');
+        if(!isset($_SESSION['email'])){
+            redirect('app');
+        }
     }
 
 	public function index()

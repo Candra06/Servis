@@ -3,13 +3,13 @@
 class mTeknisi extends CI_Model{
 
     public function tampilData(){
-        $q = $this->db->query("SELECT * FROM teknisi");
+        $q = $this->db->query("SELECT * FROM user");
         $ada = $q->result_array();
         return $ada;
     }
 
     public function kode(){
-        $q = $this->db->query("SELECT MAX(RIGHT(kd_teknisi,2)) as kode FROM teknisi", false);
+        $q = $this->db->query("SELECT MAX(RIGHT(kd_user,2)) as kode FROM user", false);
         $kd = "";
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $k){
@@ -21,23 +21,23 @@ class mTeknisi extends CI_Model{
         }
         $kode = "KT".$kd;
         $data = array(
-            'kd_teknisi' => $kode
+            'kd_user' => $kode
         );
         return $kode;
     }
 
     public function insert($array){
-        $this->db->insert("teknisi", $array);
+        $this->db->insert("user", $array);
     }
 
     public function updateData($array, $kode){
-        $this->db->update("teknisi", $array, ['kd_teknisi' => $kode]);
+        $this->db->update("user", $array, ['kd_user' => $kode]);
     }
 
     public function deleteData($kode)
     {
-        $this->db->where('kd_teknisi', $kode);
-        $this->db->delete('teknisi');
+        $this->db->where('kd_user', $kode);
+        $this->db->delete('user');
         return true;
     }
 }

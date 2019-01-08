@@ -14,7 +14,9 @@ class Teknisi extends CI_Controller {
         } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
             $this->update($this->uri->segment(3));
         }
-        
+        if(!isset($_SESSION['email'])){
+            redirect('app');
+        }
     }
 
 	public function index()
@@ -48,7 +50,7 @@ class Teknisi extends CI_Controller {
                 'nama' => $p['nama'],
                 'alamat' => $p['alamat'],
                 'no_hp' => $p['no_hp'],
-                'create_by' => 1,
+                'create_by' => $_SESSION['kd'],
                 'create_at' => $date
             ];
 
@@ -66,7 +68,7 @@ class Teknisi extends CI_Controller {
         $data['title'] = "Prima Comp";
         $data['header'] = "Ubah Data Teknisi";
         $data['content'] = "teknisi/add";
-        $data['data'] = $this->db->get_where("teknisi", ['kd_teknisi' => $kode])->row_array();
+        $data['data'] = $this->db->get_where("user", ['kd_user' => $kode])->row_array();
 		$this->load->view('backend/index',$data);
     }
 
@@ -78,8 +80,8 @@ class Teknisi extends CI_Controller {
                 'nama' => $p['nama'],
                 'alamat' => $p['alamat'],
                 'no_hp' => $p['no_hp'],
-                'modified_by' => 1,
-                'modified_at' => $date
+                'modified_by' => $_SESSION['kd'],
+                'modified_date' => $date
             ];
             $this->mTeknisi->updateData($array, $kode);
             $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
@@ -94,10 +96,10 @@ class Teknisi extends CI_Controller {
         try{
             $this->mTeknisi->deleteData($kode);
             $this->session->set_flashdata("message", ['success', 'Berhasil hapus data '.$this->uri->segment(1)]);
-            redirect(base_url("teknisi"));
+            redirect(base_url("user"));
         }catch(Exceptio $e){
             $this->session->set_flashdata("message", ['danger', 'Gagal input data '.$this->uri->segment(1)]);
-            redirect(base_url("teknisi"));
+            redirect(base_url("user"));
         }
     }
 

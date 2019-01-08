@@ -4,9 +4,9 @@ class mServis extends CI_Model{
 
     public function tampilData(){
         $q = $this->db->query("SELECT transaksi_servis.*, pelanggan.nama AS namaPelanggan, 
-                                teknisi.nama AS namaTeknisi 
-                                FROM transaksi_servis, teknisi, pelanggan
-                                WHERE transaksi_servis.created_by = teknisi.kd_teknisi 
+                                user.nama AS namaTeknisi 
+                                FROM transaksi_servis, user, pelanggan
+                                WHERE transaksi_servis.created_by = user.kd_user 
                                 AND transaksi_servis.kd_pelanggan = pelanggan.kd_pelanggan");
         $ada = $q->result_array();
         return $ada;
@@ -82,16 +82,16 @@ class mServis extends CI_Model{
     }
 
     public function insert($array){
-        $this->db->insert("teknisi", $array);
+        $this->db->insert("user", $array);
     }
 
     public function updateData($array, $kode){
-        $this->db->update("teknisi", $array, ['kd_teknisi' => $kode]);
+        $this->db->update("user", $array, ['kd_user' => $kode]);
     }
 
     public function deleteData($kode)
     {
-        $this->db->where('kd_teknisi', $kode);
+        $this->db->where('kd_user', $kode);
         $this->db->delete('teknisi');
         return true;
     }

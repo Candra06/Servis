@@ -36,12 +36,12 @@
                   foreach ($data as $d){
                 ?>
                 <tr>
-                  <td><?= $d['kd_teknisi']?></td>
+                  <td><?= $d['kd_user']?></td>
                   <td><?= $d['nama']?></td>
                   <td><?= $d['no_hp']?></td>
                   <td>
-                    <a href="<?= base_url().$this->uri->segment(1)."/edit/$d[kd_teknisi]"?>"><button type="" class="btn btn-primary btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-pencil-alt"></i></div></button></a> 
-                    <a href="<?= base_url().$this->uri->segment(1)."/delete/$d[kd_teknisi]"?>"><button type="" class="btn btn-danger btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-trash"></i></div></button></a>
+                    <a href="<?= base_url().$this->uri->segment(1)."/edit/$d[kd_user]"?>"><button type="" class="btn btn-primary btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-pencil-alt"></i></div></button></a> 
+                    <a href="<?= base_url().$this->uri->segment(1)."/delete/$d[kd_user]"?>"><button type="" class="btn btn-danger btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-trash"></i></div></button></a>
                   </td>
                 </tr>
                 <?php } ?>

@@ -14,7 +14,9 @@ class User extends CI_Controller {
         } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
             $this->update($this->uri->segment(3));
         }
-        
+        if(!isset($_SESSION['email'])){
+            redirect('app');
+        }
     }
 
 	public function index()

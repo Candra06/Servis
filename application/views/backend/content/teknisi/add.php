@@ -17,7 +17,7 @@
               <div class="col-lg-6">
                 <div class="form-group">
                   <label class="form-control-label">Kode Teknisi: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" name="kd_user" value="<?php  if( $data == null){ echo $kode_user; } else { echo Input_helper::postOrOr('kd_teknisi', $data['kd_teknisi']); } ?>" placeholder="Kode Teknisi" required disabled>
+                  <input class="form-control form-control-dark" type="text" name="kd_user" value="<?php  if( $data == null){ echo $kode_user; } else { echo Input_helper::postOrOr('kd_user', $data['kd_user']); } ?>" placeholder="Kode Teknisi" required disabled>
                   <!-- <input class="form-control form-control-dark" type="hidden" name="kd_user" value="<?= Input_helper::postOrOr('kd_user', $data['kd_user']) ?>" placeholder="Kode Teknisi" disabled> -->
                 </div>
               </div><!-- col-4 -->

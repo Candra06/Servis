@@ -14,6 +14,10 @@ class Servis extends CI_Controller {
         } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
             $this->update($this->uri->segment(3));
         }
+
+        if(!isset($_SESSION['email'])){
+            redirect('app');
+        }
         
     }
 
@@ -47,7 +51,7 @@ class Servis extends CI_Controller {
             $date = date('Y-m-d H:i:s');
             $kode_user = $this->mServis->kode();
             $array = [
-                'kd_teknisi' => $kode_user,
+                'kd_user' => $kode_user,
                 'nama' => $p['nama'],
                 'alamat' => $p['alamat'],
                 'no_hp' => $p['no_hp'],
@@ -57,7 +61,7 @@ class Servis extends CI_Controller {
 
             $this->mTeknisi->insert($array);
             $this->session->set_flashdata("message", ['success', 'Berhasil input data '.$this->uri->segment(1)]);
-            redirect(base_url("teknisi"));
+            redirect(base_url("user"));
         }catch (Exception $e){
             $this->session->set_flashdata("message", ['danger', 'Gagal'.$this->uri->segment(1)]);
             $this->add();
@@ -86,10 +90,10 @@ class Servis extends CI_Controller {
             ];
             $this->mTeknisi->updateData($array, $kode);
             $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
-            redirect(base_url("teknisi"));
+            redirect(base_url("user"));
         }catch(Exception $e){
             $this->session->set_flashdata("message", ['danger', 'Gagal update data '.$this->uri->segment(1)]);
-            redirect(base_url("teknisi"));
+            redirect(base_url("user"));
         }
     }
 
