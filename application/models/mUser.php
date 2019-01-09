@@ -3,7 +3,12 @@
 class mUser extends CI_Model{
 
     public function tampilData(){
-        $q = $this->db->query("SELECT * FROM user");
+        $q = $this->db->query("SELECT *, (CASE 
+                                WHEN (level = '1') THEN 'Admin'
+                                WHEN (level = '2') THEN 'Teknisi'
+                                WHEN (level = '3') THEN 'Operator' END) as jabatan,
+                                (CASE WHEN (status = '1') THEN 'Aktif' ELSE 'Banned' END) as status
+                                FROM user");
         $ada = $q->result_array();
         return $ada;
     }

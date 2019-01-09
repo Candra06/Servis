@@ -41,7 +41,7 @@
                   <td><?= $d['kd_user']?></td>
                   <td><?= $d['nama']?></td>
                   <td><?= $d['email']?></td>
-                  <td><?= $d['level']?></td>
+                  <td><?= $d['jabatan']?></td>
                   <td><?= $d['status']?></td>
                   <td>
                     <a href="<?= base_url().$this->uri->segment(1)."/edit/$d[kd_user]"?>"><button type="" class="btn btn-primary btn-icon mg-r-5 mg-b-10"><div><i class="fa fa-pencil-alt"></i></div></button></a> 

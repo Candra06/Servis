@@ -45,20 +45,20 @@ class User extends CI_Controller {
         try{
             $date = date('Y-m-d H:i:s');
             $kode_user = $this->mUser->kode();
+            $pass = md5($p['password']);
             $array = [
                 'kd_user' => $kode_user,
                 'nama' => $p['nama'],
                 'level' => $p['level'],
                 'email' => $p['email'],
-                'password' => $p['password'],
+                'password' => $pass,
                 'status' => $p['status'],
                 'no_hp' => $p['no_hp'],
                 'alamat' => $p['alamat'],
-                'create_by' => 1,
+                'create_by' => $_SESSION['kd'],
                 'create_date' => $date
             ];
-
-            $this->muser->insert($array);
+            $this->mUser->insert($array);
             $this->session->set_flashdata("message", ['success', 'Berhasil input data '.$this->uri->segment(1)]);
             redirect(base_url("user"));
         }catch (Exception $e){
@@ -79,25 +79,47 @@ class User extends CI_Controller {
     public function update($kode){
         $p = $_POST;
         $date = date('Y-m-d H:i:s');
-        try{
-            $array = [
-                'nama' => $p['nama'],
-                'level' => $p['level'],
-                'email' => $p['email'],
-                'no_hp' => $p['no_hp'],
-                'alamat' => $p['alamat'],
-                'password' => $p['password'],
-                'status' => $p['status'],
-                'modified_by' => 1,
-                'modified_date' => $date
-            ];
-            $this->mUser->updateData($array, $kode);
-            $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
-            redirect(base_url("user"));
-        }catch(Exception $e){
-            $this->session->set_flashdata("message", ['danger', 'Gagal update data '.$this->uri->segment(1)]);
-            redirect(base_url("user"));
-        }
+        if ($p['password' == '']) {
+            try{
+                $array = [
+                    'nama' => $p['nama'],
+                    'level' => $p['level'],
+                    'email' => $p['email'],
+                    'no_hp' => $p['no_hp'],
+                    'alamat' => $p['alamat'],
+                    'status' => $p['status'],
+                    'modified_by' => 1,
+                    'modified_date' => $date
+                ];
+                $this->mUser->updateData($array, $kode);
+                $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
+                redirect(base_url("user"));
+            }catch(Exception $e){
+                $this->session->set_flashdata("message", ['danger', 'Gagal update data '.$this->uri->segment(1)]);
+                redirect(base_url("user"));
+            }
+        } else {
+            try{
+                $pass = md5($p['password']);
+                $array = [
+                    'nama' => $p['nama'],
+                    'level' => $p['level'],
+                    'email' => $p['email'],
+                    'no_hp' => $p['no_hp'],
+                    'alamat' => $p['alamat'],
+                    'password' => $pass,
+                    'status' => $p['status'],
+                    'modified_by' => 1,
+                    'modified_date' => $date
+                ];
+                $this->mUser->updateData($array, $kode);
+                $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
+                redirect(base_url("user"));
+            }catch(Exception $e){
+                $this->session->set_flashdata("message", ['danger', 'Gagal update data '.$this->uri->segment(1)]);
+                redirect(base_url("user"));
+            }
+        }   
     }
 
     public function delete($kode){

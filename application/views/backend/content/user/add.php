@@ -8,7 +8,7 @@
 
       <div class="br-pagebody">
       <div class="br-section-wrapper">
-          <h6 class="br-section-label">Input Data Teknisi</h6>
+          <h6 class="br-section-label">Input Data User</h6>
           <p class="br-section-text">A form with a label on top of each form control.</p>
 
           <div class="form-layout form-layout-1">
@@ -44,17 +44,20 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Password: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="password" name="password" value="<?= Input_helper::postOrOr('password', $data['password']) ?>" placeholder="Masukkan Password" required>
+                  <input class="form-control form-control-dark" type="password" name="password" value="" placeholder="<?php if( $data == null){ echo 'Masukkan Password'; } else { echo 'Kosongkan Jika tidak ingin dirubah'; }; ?>">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                 <label class="form-control-label">Level: <span class="tx-danger">*</span></label>
+                <?php 
+                  $level = Input_helper::postOrOr('level', $data['level']);
+                ?>
                 <select class="form-control form-control-dark select-2" id="level" name="level" placeholder="Pilih Status">
                     <option value="">Pilih Level</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Teknisi</option>
-                    <option value="3">Operator</option>
+                    <option value="1" <?= ($level == '1' ? "selected" : '')?>>Admin</option>
+                    <option value="2" <?= ($level == '2' ? "selected" : '')?>>Teknisi</option>
+                    <option value="3" <?= ($level == '3' ? "selected" : '')?>>Operator</option>
                   </select>
                 </div>
               </div><!-- col-4 -->
@@ -69,10 +72,13 @@
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                 <label class="form-control-label">Status: <span class="tx-danger">*</span></label>
+                <?php 
+                  $status = Input_helper::postOrOr('status', $data['status']);
+                ?>
                   <select class="form-control form-control-dark select-2" id="status" name="status" placeholder="Pilih Status">
                     <option value="">Pilih Status</option>
-                    <option value="1">Aktif</option>
-                    <option value="0">Banned</option>
+                    <option value="1" <?= ($status == '1' ? "selected" : '')?>>Aktif</option>
+                    <option value="0" <?= ($status == '0' ? "selected" : '')?>>Banned</option>
                     
                   </select>
                 </div>
