@@ -78,7 +78,7 @@
               </div>
               <hr>
               <ul class="list-unstyled user-profile-nav">
-                <li><a href=""><i class="icon ion-ios-person"></i> Edit Profile</a></li>
+                <li><a href="" data-toggle="modal" data-target="#modaldemo"><i class="icon ion-ios-person"></i> Edit Profile</a></li>
                 <li><a href="<?= base_url('app/logout')?>"><i class="icon ion-power"></i> Sign Out</a></li>
               </ul>
             </div><!-- dropdown-menu -->
@@ -88,3 +88,44 @@
       </div><!-- br-header-right -->
     </div><!-- br-header -->
     <!-- ########## END: HEAD PANEL ########## -->
+
+    <!-- BASIC MODAL -->
+    <div id="modaldemo" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content bd-0 tx-14">
+            <div class="modal-header pd-y-20 pd-x-25">
+              <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><?php echo $head; ?></h6>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body pd-25">
+              <div class="form-group">
+                <label for="form-control-label" class="">Nama</label>
+                <input type="text" name="email" value="<?= Input_helper::postOrOr('nama', $data['nama']) ?>" class="form-control pd-y-12" placeholder="Masukkan nama">
+              </div><!-- form-group -->
+              <div class="form-group">
+                <label for="form-control-label" class="">Email</label>
+                <input type="email" name="email" value="<?= Input_helper::postOrOr('email', $data['email']) ?>" class="form-control pd-y-12" placeholder="Masukkan email">
+              </div><!-- form-group -->
+              <div class="form-group">
+                <label for="form-control-label" class="">Alamat</label>
+                <textarea rows="2" id="alamat" name="alamat" value="" class="form-control" placeholder="Masukkan alamat"><?= Input_helper::postOrOr('alamat', $data['alamat']) ?></textarea>
+              </div><!-- form-group -->
+              <div class="form-group">
+                <label for="form-control-label" class="">No HP</label>
+                <input type="text" name="no_hp" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" class="form-control pd-y-12" placeholder="Masukkan No HP">
+              </div><!-- form-group -->
+              <div class="form-group mg-b-20">
+                <label for="form-control-label" class="">Password</label>
+                <input type="password" name="password" class="form-control pd-y-12" placeholder="Kosongkan jika tidak ingin dirubah">
+                
+              </div><!-- form-group -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-semibold">Save changes</button>
+              <button type="button" class="btn btn-secondary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-semibold" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div><!-- modal-dialog -->
+      </div><!-- modal -->

@@ -7,9 +7,11 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         $this->load->helper("Response_Helper");
         $this->load->helper('url');
+        $this->load->helper("Input_helper");
         if(!isset($_SESSION['email'])){
             redirect('app');
         }
+        
     }
 
 	public function index()
@@ -17,7 +19,13 @@ class Dashboard extends CI_Controller {
         $data['title'] = "Dashboard Prima Comp";
         $data['header'] = "Dashboard";
         $data['content'] = "dashboard/index";
-		$this->load->view('backend/index',$data);
-		
-	}
+        $data['head'] = "Edit Profil";
+        $data['data'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+        $this->load->view('backend/index',$data);
+    }
+    
+    public function profil(){
+        $data['head'] = "Edit Profil";
+        
+    }
 }
