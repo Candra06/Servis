@@ -40,12 +40,24 @@ class App extends CI_Controller {
 			$this->session->set_flashdata("message", ['warning', 'Email anda tidak Terdaftar']);
 		}else if(md5($d['password']) != $cekData['password']){
 			$this->session->set_flashdata("message", ['warning', 'Password anda Salah']);
-		}else{
+		}else if($cekData['level'] == 1){
 			$_SESSION['kd'] = $cekData['kd_user'];
 			$_SESSION['email'] = $cekData['email'];
 			$_SESSION['nama'] = $cekData['nama'];
 			$_SESSION['level'] = $cekData['level'];
 			redirect(base_url('dashboard'));
+		}else if($cekData['level'] == 2){
+			$_SESSION['kd'] = $cekData['kd_user'];
+			$_SESSION['email'] = $cekData['email'];
+			$_SESSION['nama'] = $cekData['nama'];
+			$_SESSION['level'] = $cekData['level'];
+			redirect(base_url('dashboard1'));
+		}elseif ($cekData['level'] == 3) {
+			$_SESSION['kd'] = $cekData['kd_user'];
+			$_SESSION['email'] = $cekData['email'];
+			$_SESSION['nama'] = $cekData['nama'];
+			$_SESSION['level'] = $cekData['level'];
+			redirect(base_url('dashboard2'));
 		}
 	}
 	public function logout(){
