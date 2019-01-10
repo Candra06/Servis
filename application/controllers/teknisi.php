@@ -26,6 +26,7 @@ class Teknisi extends CI_Controller {
         $data['title'] = "Prima Comp";
         $data['header'] = "Data Teknisi";
         $data['content'] = "teknisi/index";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
 		$this->load->view('backend/index',$data);
 		
     }

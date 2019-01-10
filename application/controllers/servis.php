@@ -28,11 +28,15 @@ class Servis extends CI_Controller {
         $data['title'] = "Prima Comp";
         $data['header'] = "Data Servis";
         $data['content'] = "servis/index";
-		$this->load->view('backend/index',$data);
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+		$this->load->view('operator/index',$data);
 		
     }
     
     public function add(){
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
         $data['kode_user'] = $this->mServis->kode();
         $data['kode_pelanggan'] = $this->mServis->kode_pelanggan();
         $data['kode_barang'] = $this->mServis->kode_barang();
@@ -41,7 +45,7 @@ class Servis extends CI_Controller {
         $data['header'] = "Data Servis";
         $data['content'] = "servis/add";
         $data['data'] = null;
-		$this->load->view('backend/index',$data);
+		$this->load->view('operator/index',$data);
     }
 
     public function input(){
@@ -74,7 +78,7 @@ class Servis extends CI_Controller {
         $data['header'] = "Ubah Data Teknisi";
         $data['content'] = "teknisi/add";
         $data['data'] = $this->db->get_where("teknisi", ['kd_teknisi' => $kode])->row_array();
-		$this->load->view('backend/index',$data);
+		$this->load->view('operator/index',$data);
     }
 
     public function update($kode){
@@ -115,6 +119,11 @@ class Servis extends CI_Controller {
 
     public function simpanTransaksi(){
         $data = $this->mServis->simpan_transaksi();
+        echo json_encode($data);
+    }
+
+    public function addPelanggan(){
+        $data = $this->mServis->add_pelanggan();
         echo json_encode($data);
     }
 

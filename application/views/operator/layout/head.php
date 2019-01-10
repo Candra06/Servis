@@ -1,4 +1,5 @@
  <!-- ########## START: HEAD PANEL ########## -->
+ 
  <div class="br-header">
       <div class="br-header-left">
         <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
@@ -102,30 +103,75 @@
             <div class="modal-body pd-25">
               <div class="form-group">
                 <label for="form-control-label" class="">Nama</label>
-                <input type="text" name="email" value="<?= Input_helper::postOrOr('nama', $data['nama']) ?>" class="form-control pd-y-12" placeholder="Masukkan nama">
+                <input type="text" name="nama" id="namaUser" value="<?= Input_helper::postOrOr('nama', $data1['nama']) ?>" class="form-control pd-y-12" placeholder="Masukkan nama">
               </div><!-- form-group -->
               <div class="form-group">
                 <label for="form-control-label" class="">Email</label>
-                <input type="email" name="email" value="<?= Input_helper::postOrOr('email', $data['email']) ?>" class="form-control pd-y-12" placeholder="Masukkan email">
+                <input type="email" name="email" id="email" value="<?= Input_helper::postOrOr('email', $data1['email']) ?>" class="form-control pd-y-12" placeholder="Masukkan email">
               </div><!-- form-group -->
               <div class="form-group">
                 <label for="form-control-label" class="">Alamat</label>
-                <textarea rows="2" id="alamat" name="alamat" value="" class="form-control" placeholder="Masukkan alamat"><?= Input_helper::postOrOr('alamat', $data['alamat']) ?></textarea>
+                <textarea rows="2" id="alamat" id="alamat" name="alamat" value="" class="form-control" placeholder="Masukkan alamat"><?= Input_helper::postOrOr('alamat', $data1['alamat']) ?></textarea>
               </div><!-- form-group -->
               <div class="form-group">
                 <label for="form-control-label" class="">No HP</label>
-                <input type="text" name="no_hp" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" class="form-control pd-y-12" placeholder="Masukkan No HP">
+                <input type="text" name="no_hp" id="no_hp" value="<?= Input_helper::postOrOr('no_hp', $data1['no_hp']) ?>" class="form-control pd-y-12" placeholder="Masukkan No HP">
               </div><!-- form-group -->
               <div class="form-group mg-b-20">
                 <label for="form-control-label" class="">Password</label>
-                <input type="password" name="password" class="form-control pd-y-12" placeholder="Kosongkan jika tidak ingin dirubah">
+                <input type="password" name="password" id="password" class="form-control pd-y-12" placeholder="Kosongkan jika tidak ingin dirubah">
                 
               </div><!-- form-group -->
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-semibold">Save changes</button>
+              <button type="button" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-semibold" onclick="java_script_:editProfil()">Simpan</button>
               <button type="button" class="btn btn-secondary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-semibold" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div><!-- modal-dialog -->
       </div><!-- modal -->
+
+     <script type="text/javascript">
+        function editProfil() {
+          var nama    = $('#namaUser').val();
+          var email   = $('#email').val();
+          var alamat  = $('#alamat').val();
+          var noHP    = $('#no_hp').val();
+          var pass    = $('#password').val();
+
+          if (pass == '') {
+            $.ajax({
+              type: "POST",
+              url: '<?= base_url()?>dashboard2/profil',
+              dataType: "JSON",
+              data: {
+                nama: nama,
+                email: email,
+                alamat: alamat,
+                noHP: noHP
+              }, success: function(data){
+                console.log(data);
+              },error: function(data){
+                console.log(data);
+              }
+            })
+          } else {
+            $.ajax({
+              type: "POST",
+              url: '<?= base_url()?>dashboard2/profil2',
+              dataType: "JSON",
+              data: {
+                nama: nama,
+                email: email,
+                alamat: alamat,
+                noHP: noHP,
+                pass: pass
+              }, success: function(data){
+                console.log(data);
+              },error: function(data){
+                console.log(data);
+              }
+            })
+          }
+        }
+      </script>

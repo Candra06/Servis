@@ -93,14 +93,14 @@
   <body>
 
       <?php
-        include str_replace("system", "application/views/backend/", BASEPATH)."/layout/head.php";
-        include str_replace("system", "application/views/backend/", BASEPATH)."/layout/sidebar.php"; 
+        include str_replace("system", "application/views/teknisi/", BASEPATH)."/layout/head.php";
+        include str_replace("system", "application/views/teknisi/", BASEPATH)."/layout/sidebar.php"; 
       ?>
      <div class="br-mainpanel">
      
 
       <?php
-        include str_replace("system", "application/views/backend/", BASEPATH)."/layout/content.php";
+        include str_replace("system", "application/views/teknisi/", BASEPATH)."/layout/content.php";
       ?>
 
       <footer class="br-footer">

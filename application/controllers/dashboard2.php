@@ -20,12 +20,17 @@ class Dashboard2 extends CI_Controller {
         $data['header'] = "Dashboard";
         $data['content'] = "dashboard/index";
         $data['head'] = "Edit Profil";
-        $data['data'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
         $this->load->view('operator/index',$data);
     }
     
     public function profil(){
-        $data['head'] = "Edit Profil";
-        
+        $data = $this->mProfil->profil1();
+       echo json_encode($data);
     }
+
+    public function profil2(){
+        $data = $this->mProfil->profil2();
+        echo json_encode($data);
+     }
 }

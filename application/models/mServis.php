@@ -96,6 +96,28 @@ class mServis extends CI_Model{
         return true;
     }
 
+    public function add_pelanggan(){
+        $date = date('Y-m-d H:i:s');
+        $data = array(
+            'kd_pelanggan' => $this->input->post('kdPelanggan'),
+            'nama' => $this->input->post('namaPl'),
+            'alamat' => $this->input->post('alamat'),
+            'pekerjaan' => $this->input->post('pekerjaan'),
+            'no_hp' => $this->input->post('no_hp'),
+            'create_by' => $_SESSION['kd']
+        );
+
+        $result = $this->db->insert('pelanggan', $data);
+
+        $d = array();
+        if ($result){
+            $d = ['respons' => 'berhasil pelanggan'];
+        }else{
+            $d = ['respons' => 'gagal pelanggan'];
+        }
+        return $d;
+    }
+
     public function simpan_transaksi(){
         $date = date('Y-m-d H:i:s');
         $data = array(

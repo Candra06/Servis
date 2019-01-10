@@ -4,13 +4,13 @@
       <label class="sidebar-label">Navigation</label>
       <ul class="br-sideleft-menu">
         <li class="br-menu-item">
-          <a href="<?= base_url();?>dashboard" class="br-menu-link <?= (($this->uri->segment(1) == 'dashboard' ? 'active' : ''))?>">
+          <a href="<?= base_url('dashboard2');?>" class="br-menu-link <?= (($this->uri->segment(1) == 'dashboard' ? 'active' : ''))?>">
             <i class="menu-item-icon icon ion-ios-home-outline tx-24"></i>
             <span class="menu-item-label">Dashboard</span>
           </a><!-- br-menu-link -->
         </li><!-- br-menu-item -->
         <li class="br-menu-item">
-          <a href="<?= base_url('pelanggan') ?>" class="br-menu-link <?= (($this->uri->segment(1) == 'pelanggan' ? 'active' : ''))?>">
+          <a href="<?= base_url('pelanggan/indexOperator') ?>" class="br-menu-link <?= (($this->uri->segment(1) == 'pelanggan' ? 'active' : ''))?>">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
             <span class="menu-item-label">Data Pelanggan</span>
           </a><!-- br-menu-link -->
@@ -33,8 +33,8 @@
             <span class="menu-item-label">Transaksi</span>
           </a><!-- br-menu-link -->
           <ul class="br-menu-sub">
-            <li class="sub-item"><a href="<?= base_url('pembelian') ?>" class="sub-link <?= (($this->uri->segment(1) == 'pembelian' ? 'active' : ''))?>">Pembelian Stok</a></li>
-            <li class="sub-item"><a href="<?= base_url('penjualan') ?>" class="sub-link <?= (($this->uri->segment(1) == 'penjualan' ? 'active' : ''))?>">Penjualan</a></li>
+            <!-- <li class="sub-item"><a href="<?= base_url('pembelian') ?>" class="sub-link <?= (($this->uri->segment(1) == 'pembelian' ? 'active' : ''))?>">Pembelian Stok</a></li> -->
+            <!-- <li class="sub-item"><a href="<?= base_url('penjualan') ?>" class="sub-link <?= (($this->uri->segment(1) == 'penjualan' ? 'active' : ''))?>">Penjualan</a></li> -->
             <li class="sub-item"><a href="<?= base_url('servis') ?>" class="sub-link <?= (($this->uri->segment(1) == 'servis' ? 'active' : ''))?>">Jasa Servis</a></li>
           </ul>
         </li><!-- br-menu-item -->

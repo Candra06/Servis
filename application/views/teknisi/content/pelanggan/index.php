@@ -5,7 +5,7 @@
           <h4><?= $header ?></h4>
         </div>
         <div style="width: 15%; float: right;">
-          <a href="<?= base_url('pelanggan')?>/add" style="width: 120px; margin-right:5px;" class="btn btn-primary btn-block mg-b-5"><i class="fa fa fa-plus mg-r-10"> </i>Add Data</a>   
+          <a href="<?= base_url('pelanggan')?>/addTeknisi" style="width: 120px; margin-right:5px;" class="btn btn-primary btn-block mg-b-5"><i class="fa fa fa-plus mg-r-10"> </i>Add Data</a>   
         </div>     
       </div><!-- d-flex -->
 

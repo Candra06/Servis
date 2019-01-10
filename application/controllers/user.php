@@ -26,6 +26,7 @@ class User extends CI_Controller {
         $data['title'] = "Prima Comp";
         $data['header'] = "Data User";
         $data['content'] = "user/index";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array(); 
 		$this->load->view('backend/index',$data);
 		
     }

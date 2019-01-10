@@ -3,13 +3,16 @@
       <i class="icon ion-ios-home-outline tx-70 lh-0"></i>
         <div class="" style="width: 90%;">
           <h4><?= $header ?></h4>
-        </div>  
+        </div> 
+        <div style="width: 40%; float: right; padding-left: 170px;">
+          <a href="" data-toggle="modal" data-target="#addPelanggan" style="width: 150px; margin-right:5px;" class="btn btn-primary btn-block mg-b-5"><i class="fa fa fa-plus mg-r-10"> </i>Add Pelanggan</a>   
+        </div>
       </div><!-- d-flex -->
 
-      <div class="br-pagebody">
-      <div class="br-section-wrapper">
-        <h6 class="br-section-label">Detail Transaksi</h6>
-          
+      <div class="br-pagebody">        
+        <div class="br-section-wrapper">
+    
+          <h6 class="br-section-label">Detail Transaksi</h6>          
           <div class="form-layout form-layout-1">
             <form action="" method="post" enctype="multipart/form-data">
             <div class="row mg-b-25">
@@ -197,8 +200,49 @@
 
           
         </div><!-- br-section-wrapper -->
-
+      
       </div><!-- br-pagebody -->
+
+      <!-- BASIC MODAL -->
+      <div id="addPelanggan" class="modal fade">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bd-0 tx-14">
+              <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Tambah Pelanggan</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body pd-25">
+                <div class="form-group">
+                  <label class="form-control-label">Kode Pelanggan: <span class="tx-danger">*</span></label>
+                  <input class="form-control " type="text" id="kd_pelanggan" name="kd_pelanggan" value="<?php  if( $data == null){ echo $kode_pelanggan; } else { echo Input_helper::postOrOr('kd_pelanggan', $data['kd_pelanggan']); } ?>" placeholder="Kode Pelanggan" disabled required>
+                  <!-- <input class="form-control form-control-dark" type="hidden" name="kd_user" value="<?= Input_helper::postOrOr('kd_user', $data['kd_user']) ?>" placeholder="Kode Teknisi" disabled> -->
+                </div>
+                <div class="form-group">
+                  <label for="form-control-label" class="">Nama</label>
+                  <input type="text" name="namaPl" id="namaPl" value="Luki" class="form-control pd-y-12" placeholder="Masukkan Nama">
+                </div><!-- form-group -->
+                <div class="form-group">
+                  <label for="form-control-label" class="">Pekerjaan</label>
+                  <input type="email" name="pekerjaanPl" id="pekerjaanPl" value="Perawat" class="form-control pd-y-12" placeholder="Masukkan Pekerjaan">
+                </div><!-- form-group -->
+                <div class="form-group">
+                  <label for="form-control-label" class="">Alamat</label>
+                  <textarea rows="2" id="alamatPl" name="alamatPl" value="" class="form-control" placeholder="Masukkan Alamat">Jl. Mastrip Kembang</textarea>
+                </div><!-- form-group -->
+                <div class="form-group">
+                  <label for="form-control-label" class="">No HP</label>
+                  <input type="text" name="no_hpPl" id="no_hpPl" value="082229411164" class="form-control pd-y-12" placeholder="Masukkan No HP">
+                </div><!-- form-group -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-semibold" onclick="java_script_:simpanPelanggan()">Simpan</button>
+                <button type="button" class="btn btn-secondary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-semibold" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div><!-- modal-dialog -->
+        </div><!-- modal -->
 
       <script type="text/javascript">
       $(function(){
@@ -266,6 +310,31 @@
         
       }
 
+      function simpanPelanggan() {
+        var kdPelanggan   = $('#kd_pelanggan').val();
+        var namaPl        = $('#namaPl').val();
+        var alamat        = $('#alamatPl').val();
+        var pekerjaan     = $('#pekerjaanPl').val();
+        var no_hp         = $('#no_hpPl').val();
+
+        $.ajax({
+          type: "POST",
+          url: '<?= base_url() ?>Servis/addPelanggan',
+          dataType: "JSON",
+          data: {
+            kdPelanggan: kdPelanggan,
+            namaPl: namaPl,
+            alamat: alamat,
+            pekerjaan: pekerjaan,
+            no_hp: no_hp
+          },success: function(data){
+            console.log(data);
+          },error: function(data){
+            console.log(data);
+          }
+        })
+      }
+
       function simpanData(){
         var no_trans      = $('#kd_transaksi').val();
         var tgl_trans     = $('#tgl_transaksi').val();
@@ -280,6 +349,7 @@
         var no_seri       = $('#no_seri').val();
         var namaBarang    = $('#nama_barang').val();
         var teknisi       = $('#teknisi').val();
+       
 
         $.ajax({      //simpan ke tabel transaksi servis
           type: "POST",
@@ -298,7 +368,8 @@
             keterangan: keterangan,   //simpan ke tabel transaksi detail
             terima: terima,
             selesai: selesai,
-            kerusakan: kerusakan
+            kerusakan: kerusakan,
+            
           },success: function(data){
             console.log(data);
           },error: function(data){

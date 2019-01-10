@@ -102,19 +102,19 @@
             <div class="modal-body pd-25">
               <div class="form-group">
                 <label for="form-control-label" class="">Nama</label>
-                <input type="text" name="email" value="<?= Input_helper::postOrOr('nama', $data['nama']) ?>" class="form-control pd-y-12" placeholder="Masukkan nama">
+                <input type="text" name="email" value="<?= Input_helper::postOrOr('nama', $data1['nama']) ?>" class="form-control pd-y-12" placeholder="Masukkan nama">
               </div><!-- form-group -->
               <div class="form-group">
                 <label for="form-control-label" class="">Email</label>
-                <input type="email" name="email" value="<?= Input_helper::postOrOr('email', $data['email']) ?>" class="form-control pd-y-12" placeholder="Masukkan email">
+                <input type="email" name="email" value="<?= Input_helper::postOrOr('email', $data1['email']) ?>" class="form-control pd-y-12" placeholder="Masukkan email">
               </div><!-- form-group -->
               <div class="form-group">
                 <label for="form-control-label" class="">Alamat</label>
-                <textarea rows="2" id="alamat" name="alamat" value="" class="form-control" placeholder="Masukkan alamat"><?= Input_helper::postOrOr('alamat', $data['alamat']) ?></textarea>
+                <textarea rows="2" id="alamat" name="alamat" value="" class="form-control" placeholder="Masukkan alamat"><?= Input_helper::postOrOr('alamat', $data1['alamat']) ?></textarea>
               </div><!-- form-group -->
               <div class="form-group">
                 <label for="form-control-label" class="">No HP</label>
-                <input type="text" name="no_hp" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" class="form-control pd-y-12" placeholder="Masukkan No HP">
+                <input type="text" name="no_hp" value="<?= Input_helper::postOrOr('no_hp', $data1['no_hp']) ?>" class="form-control pd-y-12" placeholder="Masukkan No HP">
               </div><!-- form-group -->
               <div class="form-group mg-b-20">
                 <label for="form-control-label" class="">Password</label>

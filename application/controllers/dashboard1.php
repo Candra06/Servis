@@ -20,7 +20,7 @@ class Dashboard1 extends CI_Controller {
         $data['header'] = "Dashboard";
         $data['content'] = "dashboard/index";
         $data['head'] = "Edit Profil";
-        $data['data'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
         $this->load->view('teknisi/index',$data);
     }
     

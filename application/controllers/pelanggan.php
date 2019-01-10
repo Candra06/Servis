@@ -26,7 +26,33 @@ class Pelanggan extends CI_Controller {
         $data['title'] = "Prima Comp";
         $data['header'] = "Data Pelanggan";
         $data['content'] = "pelanggan/index";
-		$this->load->view('backend/index',$data);		
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+		$this->load->view('teknisi/index',$data);		
+    }
+
+    public function indexOperator()
+	{
+        $this->load->model("mPelanggan");
+        $data['data'] = $this->mPelanggan->tampilData();
+        $data['title'] = "Prima Comp";
+        $data['header'] = "Data Pelanggan";
+        $data['content'] = "pelanggan/index";
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+		$this->load->view('operator/index',$data);		
+    }
+
+    public function indexTeknisi()
+	{
+        $this->load->model("mPelanggan");
+        $data['data'] = $this->mPelanggan->tampilData();
+        $data['title'] = "Prima Comp";
+        $data['header'] = "Data Pelanggan";
+        $data['content'] = "pelanggan/index";
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+		$this->load->view('teknisi/index',$data);		
     }
     
     public function add()
@@ -36,7 +62,33 @@ class Pelanggan extends CI_Controller {
         $data['title'] = "Prima Comp";
         $data['header'] = "Data Pelanggan";
         $data['content'] = "pelanggan/add";
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
 		$this->load->view('backend/index',$data); 
+    }
+
+    public function addOperator()
+    {
+        $data['kode_pelanggan'] = $this->mPelanggan->kode();
+        $data['data'] = null;
+        $data['title'] = "Prima Comp";
+        $data['header'] = "Data Pelanggan";
+        $data['content'] = "pelanggan/add";
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+		$this->load->view('operator/index',$data); 
+    }
+
+    public function addTeknisi()
+    {
+        $data['kode_pelanggan'] = $this->mPelanggan->kode();
+        $data['data'] = null;
+        $data['title'] = "Prima Comp";
+        $data['header'] = "Data Pelanggan";
+        $data['content'] = "pelanggan/add";
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+		$this->load->view('teknisi/index',$data); 
     }
 
     public function input(){
