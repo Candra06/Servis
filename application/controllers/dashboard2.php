@@ -8,6 +8,7 @@ class Dashboard2 extends CI_Controller {
         $this->load->helper("Response_Helper");
         $this->load->helper('url');
         $this->load->helper("Input_helper");
+        $this->load->model("mProfil");
         if(!isset($_SESSION['email'])){
             redirect('app');
         }
@@ -26,7 +27,7 @@ class Dashboard2 extends CI_Controller {
     
     public function profil(){
         $data = $this->mProfil->profil1();
-       echo json_encode($data);
+        echo json_encode($data);
     }
 
     public function profil2(){

@@ -32,8 +32,9 @@
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
-                <label class="form-control-label">Teknisi: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="teks" id="teknisi" name="teknisi" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Masukkan Masukkan No HP" required>
+                <label class="form-control-label">Operator: <span class="tx-danger">*</span></label>
+                  <input class="form-control form-control-dark" type="teks" value="<?= $_SESSION['nama'] ?>" placeholder="Masukkan Masukkan No HP" disabled required>
+                  <input class="form-control form-control-dark" type="hidden" id="teknisi" name="teknisi" value="<?= $_SESSION['kd'] ?>" placeholder="Masukkan Masukkan No HP" disabled required>
                 </div>
               </div><!-- col-4 -->
             </div><!-- row -->
