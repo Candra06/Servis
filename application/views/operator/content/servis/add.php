@@ -17,47 +17,29 @@
             <form action="" method="post" enctype="multipart/form-data">
             <div class="row mg-b-25">
 
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <div class="form-group">
                   <label class="form-control-label">Nomor Transaksi: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" id="kd_transaksi" name="kd_transaksi" value="<?php  if( $data == null){ echo $kode_user; } else { echo Input_helper::postOrOr('kd_user', $data['kd_user']); } ?>" placeholder="Masukkan Total Harga" required disabled>
-                  <!-- <input class="form-control form-control-dark" type="hidden" name="kd_user" value="<?= Input_helper::postOrOr('kd_user', $data['kd_user']) ?>" placeholder="Kode Teknisi" disabled> -->
+                  <input class="form-control form-control-dark" type="text" id="kd_transaksi" name="kd_transaksi" value="<?php echo $kode_user; ?>" placeholder="Masukkan Total Harga" required disabled>
                 </div>
               </div><!-- col-4 -->
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <div class="form-group">
                   <label class="form-control-label">Tanggal Transaksi: <span class="tx-danger">*</span></label>
                   <input class="form-control form-control-dark" type="date" id="tgl_transaksi" name="tgl_transaksi" value="<?= date('Y-m-d'); ?>" required>
                 </div>
               </div><!-- col-4 -->
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <div class="form-group mg-b-10-force">
                 <label class="form-control-label">Operator: <span class="tx-danger">*</span></label>
                   <input class="form-control form-control-dark" type="teks" value="<?= $_SESSION['nama'] ?>" placeholder="Masukkan Masukkan No HP" disabled required>
-                  <input class="form-control form-control-dark" type="hidden" id="teknisi" name="teknisi" value="<?= $_SESSION['kd'] ?>" placeholder="Masukkan Masukkan No HP" disabled required>
+                  <input class="form-control form-control-dark" type="hidden" id="operator" name="operator" value="<?= $_SESSION['kd'] ?>" placeholder="Masukkan Masukkan No HP" disabled required>
                 </div>
               </div><!-- col-4 -->
-            </div><!-- row -->
-            </form>
-          </div><!-- form-layout -->
-
-          <h6 class="br-section-label">Data Pelanggan</h6>
-          
-          <div class="form-layout form-layout-1">
-            <form action="" method="post" enctype="multipart/form-data">
-            <div class="row mg-b-25">
-
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Kode Pelanggan: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" id="kd_pelanggan" name="kd_pelanggan" value="<?php  if( $data == null){ echo $kode_pelanggan; } else { echo Input_helper::postOrOr('kd_pelanggan', $data['kd_pelanggan']); } ?>" placeholder="Kode Teknisi" required>
-                  <!-- <input class="form-control form-control-dark" type="hidden" name="kd_user" value="<?= Input_helper::postOrOr('kd_user', $data['kd_user']) ?>" placeholder="Kode Teknisi" disabled> -->
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <div class="form-group">
                   <label class="form-control-label">Nama Pelanggan <span class="tx-danger">*</span></label>
-                  <select class="form-control form-control-dark select-2" id="pelanggan" name="jenis" placeholder="Pilih Status" onchange="java_script_:getPelanggan(this.options[this.selectedIndex].value)">
+                  <select class="form-control form-control-dark select-2" id="pelanggan" name="pelanggan" placeholder="Pilih Status" onchange="java_script_:getPelanggan(this.options[this.selectedIndex].value)">
                     <option value="">Pilih Pelanggan</option>
                     <?php foreach ($dataPelanggan as $dp) {?>
                     <option value="<?= $dp['kd_pelanggan'];?>"><?= $dp['nama']?></option>
@@ -66,46 +48,18 @@
                   </select>
                 </div>
               </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group mg-b-10-force">
-                <label class="form-control-label">Pekerjaan: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" id="pekerjaan" name="pekerjaan" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Masukkan Masukkan No HP" required>
-                </div>
-              </div><!-- col-4 -->
-              
-              
-
-              <div class="col-lg-8">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Alamat: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" id="alamat" name="alamat" value="<?= Input_helper::postOrOr('alamat', $data['alamat']) ?>" placeholder="Masukkan Alamat" required>
-                </div>
-              </div><!-- col-8 -->
-              <div class="col-lg-4">
-                <div class="form-group mg-b-10-force">
-                <label class="form-control-label">Nomor Telp: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="number" id="no_hp" name="no_hp" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Masukkan Masukkan No HP" required>
-                </div>
-              </div><!-- col-4 -->
-              
             </div><!-- row -->
             </form>
           </div><!-- form-layout -->
 
+         
         
           <h6 class="br-section-label">Data Barang</h6>
           
           <div class="form-layout form-layout-1">
-            <form action="" method="post" enctype="multipart/form-data">
+            <!-- <form action="" method="post" enctype="multipart/form-data"> -->
             <div class="row mg-b-25">
-
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Nama Barang: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" id="nama_barang" name="nama_barang" value="<?= Input_helper::postOrOr('nama', $data['nama']);  ?>" placeholder="Masukkan Nama Barang" required>
-                  <input class="form-control form-control-dark" type="hidden" id="kd_barang" name="kd_barang" value="<?php  if( $data == null){ echo $kode_barang; } else { echo Input_helper::postOrOr('kd_barang', $data['kd_barang']); } ?>" placeholder="Kode Teknisi" disabled>
-                </div>
-              </div><!-- col-4 -->
+              
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Jenis: <span class="tx-danger">*</span></label>
@@ -117,20 +71,54 @@
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
-                <div class="form-group mg-b-10-force">
-                <label class="form-control-label">Nomor Seri: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="number" id="no_seri" name="no_seri" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Masukkan No Seri" required>
+                <div class="form-group">
+                  <label class="form-control-label">Merk Barang: <span class="tx-danger">*</span></label>
+                  <input class="form-control form-control-dark" type="text" id="merk" name="merk" value="<?= Input_helper::postOrOr('nama', $data['nama']);  ?>" placeholder="Masukkan Merk Barang" required>
+                  <input class="form-control form-control-dark" type="hidden" id="kd_barang" name="kd_barang" value="<?= $kode_barang ?>" placeholder="Masukkan Type" required>
                 </div>
               </div><!-- col-4 -->
               
-              
-
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Spesifikasi: <span class="tx-danger">*</span></label>
-                  <textarea rows="2" id="spek" name="spek" class="form-control form-control-dark" placeholder="Masukkan Spesifikasi Barang"></textarea>
+                <label class="form-control-label">Type: <span class="tx-danger">*</span></label>
+                  <input class="form-control form-control-dark" type="text" id="type" name="type" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Masukkan Type" required>
                 </div>
-              </div><!-- col-8 -->
+              </div><!-- col-4 -->
+              
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">RAM: <span class="tx-danger">*</span></label>
+                  <input class="form-control form-control-dark" type="text" id="ram" name="ram" value="<?= Input_helper::postOrOr('nama', $data['nama']);  ?>" placeholder="Kapasitas dan Type RAM" required>
+                  <input class="form-control form-control-dark" type="hidden" id="kd_spec" name="kd_spec" value="<?= $kode_spec; ?>" placeholder="Masukkan Type" required>
+                </div>
+              </div><!-- col-4 -->
+              
+              <div class="col-lg-3">
+                <div class="form-group mg-b-10-force">
+                <label class="form-control-label">VGA: <span class="tx-danger">*</span></label>
+                  <input class="form-control form-control-dark" type="text" id="vga" name="vga" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Kapasitas dan Type VGA" required>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group mg-b-10-force">
+                <label class="form-control-label">Storage: <span class="tx-danger">*</span></label>
+                  <input class="form-control form-control-dark" type="text" id="storage" name="storage" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Kapasitas dan Type Storage" required>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group mg-b-10-force">
+                <label class="form-control-label">Processor: <span class="tx-danger">*</span></label>
+                  <input class="form-control form-control-dark" type="text" id="processor" name="processor" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Type Processor" required>
+                </div>
+              </div><!-- col-4 -->
+
+             
+             <div class="col-lg-4">
+                <div class="form-group mg-b-10-force">
+                <label class="form-control-label">Kondisi Barang: <span class="tx-danger">*</span></label>
+                <textarea rows="2" id="kondisi" name="kondisi" class="form-control form-control-dark" placeholder="Masukkan Kondisi Barang"></textarea>
+                </div>
+              </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                 <label class="form-control-label">Kerusakan: <span class="tx-danger">*</span></label>
@@ -146,54 +134,133 @@
               <div class="col-lg-4" id="kelengkapanSelect" style="display:none;visibility: hiddden;">
                 <div class="form-group">
                   <label class="form-control-label">Kelengkapan: <span class="tx-danger">*</span></label>
-                  <label class="ckbox">
-                    <input type="checkbox" name="tas"><span>Tas</span>
-                  </label>
-                  <label class="ckbox">
-                    <input type="checkbox" name="charger"><span>Charger</span>
-                  </label>
+                  <textarea rows="2" id="kelengkapan" name="kelengkapan" class="form-control form-control-dark" placeholder="Masukkan Kelengkapan Barang"></textarea>
                 </div>
               </div><!-- col-4 -->
-              
-              
-            </div><!-- row -->
-            </form>
-          </div><!-- form-layout -->
 
-          <h6 class="br-section-label">Pelayanan</h6>
-          
-          <div class="form-layout form-layout-1">
-            
-            <div class="row mg-b-25">
-
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Jumlah Harga: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="number" id="jml_bayar" name="jml_bayar" value="<?php  if( $data == null){ echo $kode_user; } else { echo Input_helper::postOrOr('kd_user', $data['kd_user']); } ?>" placeholder="Masukkan Total Harga" required >
-                  <!-- <input class="form-control form-control-dark" type="hidden" name="kd_user" value="<?= Input_helper::postOrOr('kd_user', $data['kd_user']) ?>" placeholder="Kode Teknisi" disabled> -->
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Tanggal Terima: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="date" id="tgl_terima" name="tgl_terima" value="<?= Input_helper::postOrOr('nama', $data['nama']) ?>" placeholder="Masukkan Nama Lengkap" required>
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
+              <div class="col-lg-12">
                 <div class="form-group mg-b-10-force">
-                <label class="form-control-label">Tanggal Selesai: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="date" id="tgl_selesai" name="tgl_selesai" value="<?= Input_helper::postOrOr('no_hp', $data['no_hp']) ?>" placeholder="Masukkan Masukkan No HP" required>
+                  <button class="btn btn-primary" id="tampil" onclick="java_script_:simpanData()">Tambahkan</button> 
                 </div>
-              </div><!-- col-4 -->
+              </div>
+
+              <script type="text/javascript">
+
+                function tampil() {
+                  
+                  $.ajax({
+                    type: 'ajax',
+                    url: '<?=base_url()?>Servis/tampilBarang',
+                    async: false,
+                    dataType: "JSON",
+                    success: function(data){
+                      var html = '';
+                      var i;
+                      var no=1;
+                      for (i=0; i<data.length; i++) {
+                        html += '<tr>'+
+                                  '<td>'+no+'</td>'+
+                                  '<td>'+data[i].kd_barang+'</td>'+
+                                  '<td>'+data[i].merk+' '+data[i].type+'</td>'+
+                                  '<td>'+data[i].jenis+'</td>'+
+                                  '<td>'+data[i].nama+'</td>'+
+                                  '<td>'+data[i].problem+'</td>'+
+                                  '<td>'+data[i].problem+'</td>'+
+                                '</tr>';
+                                no++;
+                      }
+                      $('#show').html(html);
+                      JSON.stringify;
+                      console.log(data);
+                    },error: function(data){
+                      
+                    }
+                  })
+                }
+
+                function simpanData(){
+                  var no_trans      = $('#kd_transaksi').val();
+                  var tgl_trans     = $('#tgl_transaksi').val();
+                  var kdPelanggan   = $('#pelanggan').val();
+                  var kdBarang      = $('#kd_barang').val();
+                  var jenis         = $('#jenis').val();
+                  var merk          = $('#merk').val();
+                  var type          = $('#type').val();   
+                  var kerusakan     = $('#kerusakan').val();
+                  var keterangan    = $('#keterangan').val();
+                  var spek          = $('#kd_spec').val();
+                  var ram           = $('#ram').val();
+                  var vga           = $('#vga').val();
+                  var storage       = $('#storage').val();
+                  var processor     = $('#processor').val();
+                  var kondisi       = $('#kondisi').val();
+                  var kelengkapan   = $('#kelengkapan').val();
+                  var keterangan    = $('#keterangan').val();      
+
+                  $.ajax({      //simpan ke tabel transaksi servis
+                    type: "POST",
+                    url: '<?= base_url() ?>Servis/simpanTransaksi',
+                    dataType: "JSON",
+                    data: {
+                      no_trans: no_trans,
+                      tgl_trans: tgl_trans,
+                      kdPelanggan: kdPelanggan,
+                      merk: merk,
+                      kdBarang: kdBarang,     //simpan ke tabel barang
+                      jenis: jenis,
+                      spek: spek,
+                      type: type,
+                      keterangan: keterangan,   //simpan ke tabel transaksi detail
+                      kelengkapan: kelengkapan,
+                      ram: ram,
+                      vga: vga,
+                      kondisi: kondisi,
+                      storage: storage,
+                      processor: processor,
+                      kerusakan: kerusakan,
+                    },success: function(data){
+                      tampil();
+                    },error: function(data){
+                      console.log(data);
+                    }
+                  })
+                }
+              </script>
+             
+              <div class="col-lg-12">
+                <div class="form-group mg-b-10-force">
+                <div class="bd bd-white-1 rounded table-responsive">
+                  <table class="table mg-b-0">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jenis</th>
+                        <th>Pelanggan</th>
+                        <th>Problem</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="show">
+                     
+                    </tbody>
+                    </table>
+                    </div>
+                </div>
+              </div>
+              
             </div><!-- row -->
-           
+            <!-- </form> -->
           </div><!-- form-layout -->
+
+
 
           <h6 class="br-section-label"></h6>
 
 
             <div class="form-layout-footer">
-              <button class="btn btn-primary" id="simpan" onclick="java_script_:simpanData()">Submit</button>
+              <button class="btn btn-primary" id="simpan" onclick="">Simpan</button>
               <button class="btn btn-secondary">Cancel</button>
             </div><!-- form-layout-footer -->
         
@@ -222,19 +289,19 @@
                 </div>
                 <div class="form-group">
                   <label for="form-control-label" class="">Nama</label>
-                  <input type="text" name="namaPl" id="namaPl" value="Luki" class="form-control pd-y-12" placeholder="Masukkan Nama">
+                  <input type="text" name="namaPl" id="namaPl" value="" class="form-control pd-y-12" placeholder="Masukkan Nama">
                 </div><!-- form-group -->
                 <div class="form-group">
                   <label for="form-control-label" class="">Pekerjaan</label>
-                  <input type="email" name="pekerjaanPl" id="pekerjaanPl" value="Perawat" class="form-control pd-y-12" placeholder="Masukkan Pekerjaan">
+                  <input type="email" name="pekerjaanPl" id="pekerjaanPl" value="" class="form-control pd-y-12" placeholder="Masukkan Pekerjaan">
                 </div><!-- form-group -->
                 <div class="form-group">
                   <label for="form-control-label" class="">Alamat</label>
-                  <textarea rows="2" id="alamatPl" name="alamatPl" value="" class="form-control" placeholder="Masukkan Alamat">Jl. Mastrip Kembang</textarea>
+                  <textarea rows="2" id="alamatPl" name="alamatPl" value="" class="form-control" placeholder="Masukkan Alamat"></textarea>
                 </div><!-- form-group -->
                 <div class="form-group">
                   <label for="form-control-label" class="">No HP</label>
-                  <input type="text" name="no_hpPl" id="no_hpPl" value="082229411164" class="form-control pd-y-12" placeholder="Masukkan No HP">
+                  <input type="text" name="no_hpPl" id="no_hpPl" value="" class="form-control pd-y-12" placeholder="Masukkan No HP">
                 </div><!-- form-group -->
               </div>
               <div class="modal-footer">
@@ -247,8 +314,7 @@
 
       <script type="text/javascript">
       $(function(){
-        'use strict'
-
+        tampil()        
         $('.form-layout .form-control').on('focusin', function(){
           $(this).closest('.form-group').addClass('form-group-active');
         });
@@ -336,47 +402,8 @@
         })
       }
 
-      function simpanData(){
-        var no_trans      = $('#kd_transaksi').val();
-        var tgl_trans     = $('#tgl_transaksi').val();
-        var kdPelanggan   = $('#kd_pelanggan').val();
-        var kdBarang      = $('#kd_barang').val();
-        var jenis         = $('#jenis').val();
-        var terima        = $('#tgl_terima').val();
-        var selesai       = $('#tgl_selesai').val();   
-        var kerusakan     = $('#kerusakan').val();
-        var keterangan    = $('#keterangan').val();
-        var spek          = $('#spek').val();
-        var no_seri       = $('#no_seri').val();
-        var namaBarang    = $('#nama_barang').val();
-        var teknisi       = $('#teknisi').val();
-       
+      
 
-        $.ajax({      //simpan ke tabel transaksi servis
-          type: "POST",
-          url: '<?= base_url() ?>Servis/simpanTransaksi',
-          dataType: "JSON",
-          data: {
-            no_trans: no_trans,
-            tgl_trans: tgl_trans,
-            kdPelanggan: kdPelanggan,
-            teknisi: teknisi,
-            kdBarang: kdBarang,     //simpan ke tabel barang
-            namaBarang: namaBarang,
-            jenis: jenis,
-            spek: spek,
-            no_seri: no_seri,
-            keterangan: keterangan,   //simpan ke tabel transaksi detail
-            terima: terima,
-            selesai: selesai,
-            kerusakan: kerusakan,
-            
-          },success: function(data){
-            console.log(data);
-          },error: function(data){
-            console.log(data);
-          }
-        })
-      }
+     
     </script>
      

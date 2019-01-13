@@ -24,7 +24,7 @@ class mServis extends CI_Model{
     }
 
     public function kode(){
-        $q = $this->db->query("SELECT MAX(RIGHT(kd_transaksi,4)) as kode FROM transaksi_servis", false);
+        $q = $this->db->query("SELECT MAX(RIGHT(kd_transaksi,4)) as kode FROM transaksi_servis WHERE status!='0'", false);
         $kd = "";
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $k){
@@ -77,6 +77,24 @@ class mServis extends CI_Model{
         return $kode;
     }
 
+    public function kode_spec(){
+        $q = $this->db->query("SELECT MAX(RIGHT(kd_spec,2)) as kode FROM spec", false);
+        $kd = "";
+        if ($q->num_rows() > 0) {
+            foreach ($q->result() as $k){
+                $tmp = ((int)$k->kode)+1;
+                $kd = sprintf("%02s", $tmp);
+            }
+        } else {
+            $kd = "01";
+        }
+        $kode = "SP".$kd;
+        $data = array(
+            'kd_spec' => $kode
+        );
+        return $kode;
+    }
+
     public function cek_pelanggan(){
 
     }
@@ -120,42 +138,56 @@ class mServis extends CI_Model{
 
     public function simpan_transaksi(){
         $date = date('Y-m-d H:i:s');
-        $data = array(
+        $transaksi = array(
             'kd_transaksi' => $this->input->post('no_trans'),
             'tgl_transaksi' => $this->input->post('tgl_trans'),
             'kd_pelanggan' => $this->input->post('kdPelanggan'),
-            'created_by' => $this->input->post('teknisi'),
+            'created_by' => 'KU02',
             'date_created' => $date,
             'status' => 0
         );
 
-        $data2 = array(
+        $detail = array(
             'kd_transaksi' => $this->input->post('no_trans'),
             'kd_barang' => $this->input->post('kdBarang'),
             'status' => 0,
-            'tgl_terima' => $this->input->post('terima'),
-            'tgl_selesai' => $this->input->post('selesai'),
+            'tgl_terima' => $this->input->post('tgl_trans'),
             'kerusakan' => $this->input->post('kerusakan'),
-            'created_by' => $this->input->post('teknisi'),
+            'created_by' => 'KU02',
             'created_at' => $date,
         );
 
         $barang = array(
             'kd_barang' => $this->input->post('kdBarang'),
-            'nama' => $this->input->post('namaBarang'),
+            'merk' => $this->input->post('merk'),
+            'type' => $this->input->post('type'),
             'kd_pelanggan' => $this->input->post('kdPelanggan'),
             'jenis' => $this->input->post('jenis'),
-            'spesifikasi' => $this->input->post('spek'),
-            'nomor_seri' => $this->input->post('no_seri'),
-            'kondisi' => $this->input->post('kerusakan'),
+            'kd_spec' => $this->input->post('spek'),
+            'problem' => $this->input->post('kerusakan'),
+            'kondisi' => $this->input->post('kondisi'),
+            'progres' => 0,
+            'kelengkapan' => $this->input->post('kelengkapan'),
+            'create_by' => "KU02",
+            'create_at' => $date
         );
 
-        $result = $this->db->insert('transaksi_servis', $data);
-        $simpanDetail = $this->db->insert('detail_servis', $data2);
+        $spec = array(
+            'kd_spec' => $this->input->post('spek'),
+            'ram' => $this->input->post('ram'),
+            'vga' => $this->input->post('vga'),
+            'hdd' => $this->input->post('storage'),
+            'prosesor' => $this->input->post('processor'),
+            'keterangan' => $this->input->post('keterangan')
+        );
+
+        $result = $this->db->insert('transaksi_servis', $transaksi);
+        $simpanDetail = $this->db->insert('detail_servis', $detail);
         $simpanBarang = $this->db->insert('barang_servis', $barang);
+        $simpanSpec = $this->db->insert('spec', $spec);
 
         $d = array();
-        if ($result && $simpanBarang && $simpanDetail){
+        if ($result && $simpanBarang && $simpanDetail && $simpanSpec){
             $d = ['respons' => 'berhasil transaksi'];
         }else{
             $d = ['respons' => 'gagal transaksi'];
