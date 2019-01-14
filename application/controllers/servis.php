@@ -9,15 +9,15 @@ class Servis extends CI_Controller {
         $this->load->helper("Input_helper");
         $this->load->helper('url');
         $this->load->model("mServis");
-        // if ($this->uri->segment(2) == "add" && $_SERVER['REQUEST_METHOD'] == "POST") {
-        //     $this->input();
-        // } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
-        //     $this->update($this->uri->segment(3));
-        // }
+        if ($this->uri->segment(2) == "add" && $_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->input();
+        } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
+            $this->update($this->uri->segment(3));
+        }
 
-        // if(!isset($_SESSION['email'])){
-        //     redirect('app');
-        // }
+        if(!isset($_SESSION['email'])){
+            redirect('app');
+        }
         
     }
 
@@ -118,8 +118,13 @@ class Servis extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function simpanTransaksi(){
+    public function simpanData(){
         $data = $this->mServis->simpan_transaksi();
+        echo json_encode($data);
+    }
+
+    public function simpanTransaksi(){
+        $data = $this->mServis->simpantrans();
         echo json_encode($data);
     }
 
@@ -130,13 +135,13 @@ class Servis extends CI_Controller {
 
     public function tampilBarang(){
         $kdTransaksi = $this->mServis->kode();
-        $data = $this->db->query("SELECT bs.merk, bs.type, bs.jenis, bs.problem, ts.kd_transaksi, pl.nama, ds.kd_barang 
-                                    FROM barang_servis bs, transaksi_servis ts, pelanggan pl, detail_servis ds
-                                    WHERE ts.kd_transaksi = 'TS1301190001'
+        $data = $this->db->query("SELECT bs.merk, bs.type, bs.jenis, bs.problem, pl.nama, ds.kd_barang,
+                                    (CASE WHEN(bs.jenis = '1') THEN 'Laptop' ELSE 'PC' END) as jenis_barang 
+                                    FROM barang_servis bs, pelanggan pl, detail_servis ds
+                                    WHERE ds.kd_transaksi = '$kdTransaksi'
                                     AND ds.kd_barang = bs.kd_barang
-                                    AND ts.kd_pelanggan = pl.kd_pelanggan
-                                    AND ts.status = '0'
-                                    AND ds.status = '0' ");
+                                    AND bs.kd_pelanggan = pl.kd_pelanggan
+                                    AND ds.status = '0'");
         echo json_encode($data->result());
     }
 

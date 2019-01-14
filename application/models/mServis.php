@@ -136,16 +136,42 @@ class mServis extends CI_Model{
         return $d;
     }
 
-    public function simpan_transaksi(){
+    public function simpantrans(){
         $date = date('Y-m-d H:i:s');
+        $kd_transaksi = $this->input->post('no_trans');
+
+        $detail = array(
+            'modified_by' => $_SESSION['kd'],
+            'modified_at' => $date,
+            'status' => 1
+        ); 
+
+        $update = $this->db->update("detail_servis", $detail, ['kd_transaksi' => $kd_transaksi]);
+
         $transaksi = array(
             'kd_transaksi' => $this->input->post('no_trans'),
             'tgl_transaksi' => $this->input->post('tgl_trans'),
             'kd_pelanggan' => $this->input->post('kdPelanggan'),
-            'created_by' => 'KU02',
+            'created_by' => $_SESSION['kd'],
             'date_created' => $date,
-            'status' => 0
+            'status' => 1
         );
+
+        $result = $this->db->insert('transaksi_servis', $transaksi);
+
+        $d = array();
+        if ( $update && $transaksi){
+            $d = ['respons' => 'berhasil transaksi'];
+        }else{
+            $d = ['respons' => 'gagal transaksi'];
+        }
+        return $d;
+        $this->load->view('operator/index',$data);
+    }
+
+    public function simpan_transaksi(){
+        $date = date('Y-m-d H:i:s');
+        
 
         $detail = array(
             'kd_transaksi' => $this->input->post('no_trans'),
@@ -153,7 +179,7 @@ class mServis extends CI_Model{
             'status' => 0,
             'tgl_terima' => $this->input->post('tgl_trans'),
             'kerusakan' => $this->input->post('kerusakan'),
-            'created_by' => 'KU02',
+            'created_by' => $_SESSION['kd'],
             'created_at' => $date,
         );
 
@@ -168,7 +194,7 @@ class mServis extends CI_Model{
             'kondisi' => $this->input->post('kondisi'),
             'progres' => 0,
             'kelengkapan' => $this->input->post('kelengkapan'),
-            'create_by' => "KU02",
+            'create_by' => $_SESSION['kd'],
             'create_at' => $date
         );
 
@@ -181,13 +207,13 @@ class mServis extends CI_Model{
             'keterangan' => $this->input->post('keterangan')
         );
 
-        $result = $this->db->insert('transaksi_servis', $transaksi);
+        
         $simpanDetail = $this->db->insert('detail_servis', $detail);
         $simpanBarang = $this->db->insert('barang_servis', $barang);
         $simpanSpec = $this->db->insert('spec', $spec);
 
         $d = array();
-        if ($result && $simpanBarang && $simpanDetail && $simpanSpec){
+        if ( $simpanBarang && $simpanDetail && $simpanSpec){
             $d = ['respons' => 'berhasil transaksi'];
         }else{
             $d = ['respons' => 'gagal transaksi'];

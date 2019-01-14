@@ -39,7 +39,7 @@
               <div class="col-lg-3">
                 <div class="form-group">
                   <label class="form-control-label">Nama Pelanggan <span class="tx-danger">*</span></label>
-                  <select class="form-control form-control-dark select-2" id="pelanggan" name="pelanggan" placeholder="Pilih Status" onchange="java_script_:getPelanggan(this.options[this.selectedIndex].value)">
+                  <select class="form-control form-control-dark select-2" id="pelanggan" name="pelanggan" placeholder="Pilih Status" Required>
                     <option value="">Pilih Pelanggan</option>
                     <?php foreach ($dataPelanggan as $dp) {?>
                     <option value="<?= $dp['kd_pelanggan'];?>"><?= $dp['nama']?></option>
@@ -63,7 +63,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Jenis: <span class="tx-danger">*</span></label>
-                  <select class="form-control form-control-dark select-2" id="jenis" name="jenis" onchange="java_script_:jenisBarang(this.options[this.selectedIndex].value)" placeholder="Pilih Status">
+                  <select class="form-control form-control-dark select-2" id="jenis" name="jenis" onchange="java_script_:jenisBarang(this.options[this.selectedIndex].value)" placeholder="Pilih Jenis" required>
                     <option value="">Pilih Jenis Barang</option>
                     <option value="1">Laptop</option>
                     <option value="2">PC</option>
@@ -73,7 +73,17 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Merk Barang: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" id="merk" name="merk" value="<?= Input_helper::postOrOr('nama', $data['nama']);  ?>" placeholder="Masukkan Merk Barang" required>
+                  <select class="form-control form-control-dark select-2" id="merk" name="merk" placeholder="Pilih Merk">
+                    <option value="">Pilih Merk</option>
+                    <option value="ASUS">ASUS</option>
+                    <option value="Acer">Acer</option>
+                    <option value="Dell">Dell</option>
+                    <option value="Hp">Hp</option>
+                    <option value="Fujitsu">Fujitsu</option>
+                    <option value="Compact">Compact</option>
+                    <option value="Toshiba">Toshiba</option>
+                    <option value="Lenovo">Lenovo</option>
+                  </select>
                   <input class="form-control form-control-dark" type="hidden" id="kd_barang" name="kd_barang" value="<?= $kode_barang ?>" placeholder="Masukkan Type" required>
                 </div>
               </div><!-- col-4 -->
@@ -88,7 +98,17 @@
               <div class="col-lg-3">
                 <div class="form-group">
                   <label class="form-control-label">RAM: <span class="tx-danger">*</span></label>
-                  <input class="form-control form-control-dark" type="text" id="ram" name="ram" value="<?= Input_helper::postOrOr('nama', $data['nama']);  ?>" placeholder="Kapasitas dan Type RAM" required>
+                  <select class="form-control form-control-dark select-2" id="ram" name="ram" placeholder="Pilih ram">
+                    <option value="">Pilih RAM</option>
+                    <option value="2gb DDR3">2gb DDR3</option>
+                    <option value="4gb DDR3">4gb DDR3</option>
+                    <option value="6gb DDR3">6gb DDR3</option>
+                    <option value="8gb DDR3">8gb DDR3</option>
+                    <option value="2gb DDR4">2gb DDR4</option>
+                    <option value="4gb DDR4">4gb DDR4</option>
+                    <option value="6gb DDR4">6gb DDR4</option>
+                    <option value="8gb DDR4">8gb DDR4</option>
+                  </select>
                   <input class="form-control form-control-dark" type="hidden" id="kd_spec" name="kd_spec" value="<?= $kode_spec; ?>" placeholder="Masukkan Type" required>
                 </div>
               </div><!-- col-4 -->
@@ -162,7 +182,7 @@
                                   '<td>'+no+'</td>'+
                                   '<td>'+data[i].kd_barang+'</td>'+
                                   '<td>'+data[i].merk+' '+data[i].type+'</td>'+
-                                  '<td>'+data[i].jenis+'</td>'+
+                                  '<td>'+data[i].jenis_barang+'</td>'+
                                   '<td>'+data[i].nama+'</td>'+
                                   '<td>'+data[i].problem+'</td>'+
                                   '<td>'+data[i].problem+'</td>'+
@@ -178,10 +198,31 @@
                   })
                 }
 
+                function simpanTransaksi(){
+                  var no_trans      = $('#kd_transaksi').val();
+                  var tgl_trans     = $('#tgl_transaksi').val();
+                  var kdPelanggan   = document.getElementById("pelanggan").value;
+
+                  $.ajax({
+                    type: "POST",
+                    url: '<?= base_url() ?>Servis/simpanTransaksi',
+                    dataType: "JSON",
+                    data: {
+                      no_trans: no_trans,
+                      tgl_trans: tgl_trans,
+                      kdPelanggan: kdPelanggan
+                    },success: function(data){
+                      tampil();
+                    },error: function(data){
+                      console.log(data);
+                    }
+                  }) 
+                }
+
                 function simpanData(){
                   var no_trans      = $('#kd_transaksi').val();
                   var tgl_trans     = $('#tgl_transaksi').val();
-                  var kdPelanggan   = $('#pelanggan').val();
+                  var kdPelanggan   = document.getElementById("pelanggan").value;
                   var kdBarang      = $('#kd_barang').val();
                   var jenis         = $('#jenis').val();
                   var merk          = $('#merk').val();
@@ -199,7 +240,7 @@
 
                   $.ajax({      //simpan ke tabel transaksi servis
                     type: "POST",
-                    url: '<?= base_url() ?>Servis/simpanTransaksi',
+                    url: '<?= base_url() ?>Servis/simpanData',
                     dataType: "JSON",
                     data: {
                       no_trans: no_trans,
@@ -220,10 +261,25 @@
                       kerusakan: kerusakan,
                     },success: function(data){
                       tampil();
+                      resetBarang();
                     },error: function(data){
                       console.log(data);
                     }
                   })
+                }
+
+                function resetBarang(){
+                  document.getElementById("jenis").value = '';
+                  document.getElementById("merk").value = '';
+                  document.getElementById("type").value = '';
+                  document.getElementById("kerusakan").value = '';
+                  document.getElementById("keterangan").value = '';
+                  document.getElementById("kondisi").value = '';
+                  document.getElementById("ram").value = '';
+                  document.getElementById("vga").value = '';
+                  document.getElementById("storage").value = '';
+                  document.getElementById("processor").value = '';
+                  document.getElementById("kelengkapan").value = '';
                 }
               </script>
              
@@ -260,7 +316,7 @@
 
 
             <div class="form-layout-footer">
-              <button class="btn btn-primary" id="simpan" onclick="">Simpan</button>
+              <button class="btn btn-primary" id="simpan" onclick="java_script_:simpanTransaksi()">Simpan</button>
               <button class="btn btn-secondary">Cancel</button>
             </div><!-- form-layout-footer -->
         
@@ -328,7 +384,7 @@
           minimumResultsForSearch: Infinity
         });
 
-        $(' #pelanggan').select2({
+        $(' #pelanggan, #merk, #ram').select2({
          
         });
 
@@ -341,30 +397,6 @@
         });
 
       });
-
-      function getPelanggan(select_item){
-        $.ajax({
-          type: 'post',
-          url: '<?= base_url()."Servis/dtPelanggan"?>',
-          dataType: 'JSON',
-          data: {
-            get_option:select_item
-          },
-          success: function(response){
-            document.getElementById('kd_pelanggan').value=response[0].kd_pelanggan;
-            document.getElementById('pekerjaan').value=response[0].pekerjaan;
-            document.getElementById('alamat').value=response[0].alamat;
-            document.getElementById('no_hp').value=response[0].no_hp;
-            document.getElementById('kd_pelanggan').disabled = true;
-            document.getElementById('pekerjaan').disabled = true;
-            document.getElementById('alamat').disabled = true;
-            document.getElementById('no_hp').disabled = true;
-          },error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert("Status: "+textStatus);
-            alert("Error: "+errorThrown);
-          }
-        })
-      }
 
       function jenisBarang(select_item){
         if(select_item == "1"){
