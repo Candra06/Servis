@@ -73,6 +73,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Merk Barang: <span class="tx-danger">*</span></label>
+
                   <select class="form-control form-control-dark select-2" id="merk" name="merk" placeholder="Pilih Merk">
                     <option value="">Pilih Merk</option>
                     <option value="ASUS">ASUS</option>
@@ -83,6 +84,7 @@
                     <option value="Compact">Compact</option>
                     <option value="Toshiba">Toshiba</option>
                     <option value="Lenovo">Lenovo</option>
+                    <option value="Axioo">Axioo</option>
                   </select>
                   <input class="form-control form-control-dark" type="hidden" id="kd_barang" name="kd_barang" value="<?= $kode_barang ?>" placeholder="Masukkan Type" required>
                 </div>
@@ -213,6 +215,7 @@
                       kdPelanggan: kdPelanggan
                     },success: function(data){
                       tampil();
+                      resetPelanggan();
                     },error: function(data){
                       console.log(data);
                     }
@@ -269,17 +272,24 @@
                 }
 
                 function resetBarang(){
+                  $('#merk').val('');
+                  $('#merk').trigger('change');
+                  $('#ram').val('');
+                  $('#ram').trigger('change');
                   document.getElementById("jenis").value = '';
-                  document.getElementById("merk").value = '';
                   document.getElementById("type").value = '';
                   document.getElementById("kerusakan").value = '';
                   document.getElementById("keterangan").value = '';
                   document.getElementById("kondisi").value = '';
                   document.getElementById("ram").value = '';
-                  document.getElementById("vga").value = '';
                   document.getElementById("storage").value = '';
                   document.getElementById("processor").value = '';
                   document.getElementById("kelengkapan").value = '';
+                }
+
+                function resetPelanggan() {
+                  $('#pelanggan').val('');
+                  $('#pelanggan').trigger('change');
                 }
               </script>
              
@@ -379,6 +389,9 @@
           $(this).closest('.form-group').removeClass('form-group-active');
         });
 
+        // $('select').selectize(options);
+       
+
         // Select2
         $('#jenis').select2({
           minimumResultsForSearch: Infinity
@@ -386,6 +399,11 @@
 
         $(' #pelanggan, #merk, #ram').select2({
          
+        });
+
+        $('#merk').selectize({
+            create: true,
+            sortField: 'text'
         });
 
         $('#jenis').on('select2:opening', function (e) {
