@@ -64,14 +64,6 @@
     <script src="<?= base_url() ?>asset/app/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
     <script src="<?= base_url() ?>asset/app/js/select2.min.js"></script>
 
-    <script src="<?= base_url() ?>asset/app/js/selectize.min.js"></script>
-    <script src="<?= base_url() ?>asset/app/js/selectize.js"></script>
-    <script src="<?= base_url() ?>asset/app/css/selectize.bootstrap2.css"></script>
-    <script src="<?= base_url() ?>asset/app/css/selectize.bootstrap3.css"></script>
-    <script src="<?= base_url() ?>asset/app/css/selectize.css"></script>
-    <script src="<?= base_url() ?>asset/app/css/selectize.default.css"></script>
-    <script src="<?= base_url() ?>asset/app/css/selectize.legacy.css"></script>
-
     <script src="<?= base_url() ?>asset/app/js/bracket.js"></script>
     <script src="<?= base_url() ?>asset/app/lib/highlightjs/highlight.pack.min.js"></script>
     <script src="<?= base_url() ?>asset/app/js/map.shiftworker.js"></script>

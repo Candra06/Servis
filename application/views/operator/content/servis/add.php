@@ -180,6 +180,7 @@
                       var i;
                       var no=1;
                       for (i=0; i<data.length; i++) {
+                        var y = "<td style='text-align:right;'><button type='button' class='btn btn-danger mg-r-5 mg-b-10' onclick='java_script_:hapus("+data[i].kd_barang+")'><div><i class='fa fa-trash'></i></div></button></td>";
                         html += '<tr>'+
                                   '<td>'+no+'</td>'+
                                   '<td>'+data[i].kd_barang+'</td>'+
@@ -187,14 +188,33 @@
                                   '<td>'+data[i].jenis_barang+'</td>'+
                                   '<td>'+data[i].nama+'</td>'+
                                   '<td>'+data[i].problem+'</td>'+
-                                  '<td>'+data[i].problem+'</td>'+
+                                  y +
                                 '</tr>';
                                 no++;
                       }
                       $('#show').html(html);
                       JSON.stringify;
-                      console.log(data);
                     },error: function(data){
+                      
+                    }
+                  })
+                }
+
+                function hapus(detail,barang) {
+                  var idDetail  = detail;
+                  var idBarang  = "barang";
+
+                  $.ajax({
+                    type: "POST",
+                    url: '<?= base_url()?>/Servis/hapusData',
+                    dataType: "JSON",
+                    data: { 
+                      idDetail: idDetail,
+                      idBarang: idBarang
+                     },
+                    success: function(data){
+                      console.log(data);
+                    },error: function(data) {
                       
                     }
                   })
@@ -217,7 +237,7 @@
                       tampil();
                       resetPelanggan();
                     },error: function(data){
-                      console.log(data);
+                      
                     }
                   }) 
                 }
@@ -266,7 +286,7 @@
                       tampil();
                       resetBarang();
                     },error: function(data){
-                      console.log(data);
+                      
                     }
                   })
                 }
@@ -281,7 +301,7 @@
                   document.getElementById("kerusakan").value = '';
                   document.getElementById("keterangan").value = '';
                   document.getElementById("kondisi").value = '';
-                  document.getElementById("ram").value = '';
+                  document.getElementById("vga").value = '';
                   document.getElementById("storage").value = '';
                   document.getElementById("processor").value = '';
                   document.getElementById("kelengkapan").value = '';
@@ -445,9 +465,9 @@
             pekerjaan: pekerjaan,
             no_hp: no_hp
           },success: function(data){
-            console.log(data);
+           
           },error: function(data){
-            console.log(data);
+           
           }
         })
       }

@@ -4,7 +4,8 @@ class mServis extends CI_Model{
 
     public function tampilData(){
         $q = $this->db->query("SELECT transaksi_servis.*, pelanggan.nama AS namaPelanggan, 
-                                user.nama AS namaTeknisi 
+                                user.nama AS namaTeknisi,
+                                (CASE WHEN(transaksi_servis.status = '1') THEN 'Masuk Antrian' ELSE 'Selesai' END) AS status
                                 FROM transaksi_servis, user, pelanggan
                                 WHERE transaksi_servis.created_by = user.kd_user 
                                 AND transaksi_servis.kd_pelanggan = pelanggan.kd_pelanggan");
@@ -219,6 +220,22 @@ class mServis extends CI_Model{
             $d = ['respons' => 'gagal transaksi'];
         }
         return $d;
+    }
+
+    public function hapus_data(){
+        // $detail = $this->input->post('idDetail');
+        $barang = $this->input->post('idBarang');
+
+        $hapusBarang = $this->db->delete("barang_servis", ['kd_barang' => $barang]);
+        // $hapusDetail = $this->db->delete("detail_servis", ['id_detail' => $detail]);
+
+        $data = array();
+        if ( $hapusBarang){
+            $data = ['respons' => 'berhasil hapus'];
+        }else{
+            $data = ['respons' => 'gagal hapus'];
+        }
+        return $data;
     }
 }
 ?>

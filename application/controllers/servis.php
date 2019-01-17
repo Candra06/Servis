@@ -9,15 +9,15 @@ class Servis extends CI_Controller {
         $this->load->helper("Input_helper");
         $this->load->helper('url');
         $this->load->model("mServis");
-        if ($this->uri->segment(2) == "add" && $_SERVER['REQUEST_METHOD'] == "POST") {
-            $this->input();
-        } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
-            $this->update($this->uri->segment(3));
-        }
+        // if ($this->uri->segment(2) == "add" && $_SERVER['REQUEST_METHOD'] == "POST") {
+        //     $this->input();
+        // } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
+        //     $this->update($this->uri->segment(3));
+        // }
 
-        if(!isset($_SESSION['email'])){
-            redirect('app');
-        }
+        // if(!isset($_SESSION['email'])){
+        //     redirect('app');
+        // }
         
     }
 
@@ -133,9 +133,14 @@ class Servis extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function hapusData(){
+        $data = $this->mServis->hapus_data();
+        echo json_encode($data);
+    }
+
     public function tampilBarang(){
         $kdTransaksi = $this->mServis->kode();
-        $data = $this->db->query("SELECT bs.merk, bs.type, bs.jenis, bs.problem, pl.nama, ds.kd_barang,
+        $data = $this->db->query("SELECT bs.merk, bs.type, ds.id_detail, bs.jenis, bs.problem, pl.nama, ds.kd_barang,
                                     (CASE WHEN(bs.jenis = '1') THEN 'Laptop' ELSE 'PC' END) as jenis_barang 
                                     FROM barang_servis bs, pelanggan pl, detail_servis ds
                                     WHERE ds.kd_transaksi = '$kdTransaksi'
