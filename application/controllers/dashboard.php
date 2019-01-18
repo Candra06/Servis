@@ -10,7 +10,10 @@ class Dashboard extends CI_Controller {
         $this->load->helper("Input_helper");
         if(!isset($_SESSION['email'])){
             redirect('app');
+        }elseif($_SESSION['level'] != '1'){
+            redirect('dashboard/');
         }
+        
         
     }
 
@@ -24,8 +27,23 @@ class Dashboard extends CI_Controller {
         $this->load->view('backend/index',$data);
     }
     
-    public function profil(){
+    public function operator()
+	{
+        $data['title'] = "Dashboard Prima Comp";
+        $data['header'] = "Dashboard";
+        $data['content'] = "dashboard/index";
         $data['head'] = "Edit Profil";
-        
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+        $this->load->view('operator/index',$data);
+    }
+
+    public function teknisi()
+	{
+        $data['title'] = "Dashboard Prima Comp";
+        $data['header'] = "Dashboard";
+        $data['content'] = "dashboard/index";
+        $data['head'] = "Edit Profil";
+        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
+        $this->load->view('teknisi/index',$data);
     }
 }

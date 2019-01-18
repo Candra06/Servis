@@ -51,13 +51,13 @@ class App extends CI_Controller {
 			$_SESSION['email'] = $cekData['email'];
 			$_SESSION['nama'] = $cekData['nama'];
 			$_SESSION['level'] = $cekData['level'];
-			redirect(base_url('dashboard1'));
+			redirect(base_url('dashboard/teknisi'));
 		}elseif ($cekData['level'] == 3) {
 			$_SESSION['kd'] = $cekData['kd_user'];
 			$_SESSION['email'] = $cekData['email'];
 			$_SESSION['nama'] = $cekData['nama'];
 			$_SESSION['level'] = $cekData['level'];
-			redirect(base_url('dashboard2'));
+			redirect(base_url('dashboard/operator'));
 		}
 	}
 	public function logout(){

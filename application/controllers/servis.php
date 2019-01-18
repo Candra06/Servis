@@ -9,15 +9,15 @@ class Servis extends CI_Controller {
         $this->load->helper("Input_helper");
         $this->load->helper('url');
         $this->load->model("mServis");
-        // if ($this->uri->segment(2) == "add" && $_SERVER['REQUEST_METHOD'] == "POST") {
-        //     $this->input();
-        // } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
-        //     $this->update($this->uri->segment(3));
-        // }
+        if ($this->uri->segment(2) == "add" && $_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->input();
+        } else if($this->uri->segment(2) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
+            $this->update($this->uri->segment(3));
+        }
 
-        // if(!isset($_SESSION['email'])){
-        //     redirect('app');
-        // }
+        if(!isset($_SESSION['email'])){
+            redirect('app');
+        }
         
     }
 

@@ -223,19 +223,20 @@ class mServis extends CI_Model{
     }
 
     public function hapus_data(){
-        // $detail = $this->input->post('idDetail');
+        $detail =  $this->input->post('idDetail');
         $barang = $this->input->post('idBarang');
 
-        $hapusBarang = $this->db->delete("barang_servis", ['kd_barang' => $barang]);
-        // $hapusDetail = $this->db->delete("detail_servis", ['id_detail' => $detail]);
+        $hapusBarang = $this->db->query("DELETE FROM barang_servis WHERE kd_barang='$barang'");
+        $hapusDetail = $this->db->query("DELETE FROM detail_servis WHERE id_detail='$detail'");
+        
 
-        $data = array();
-        if ( $hapusBarang){
-            $data = ['respons' => 'berhasil hapus'];
-        }else{
-            $data = ['respons' => 'gagal hapus'];
-        }
-        return $data;
+        // $data = array();
+        // if ( $hapusDetail){
+        //     $data = ['respons' => 'berhasil hapus'];
+        // }else{
+        //     $data = ['respons' => 'gagal hapus'];
+        // }
+        return $hapusBarang;
     }
 }
 ?>
