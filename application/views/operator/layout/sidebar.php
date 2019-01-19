@@ -4,7 +4,7 @@
       <label class="sidebar-label">Navigation</label>
       <ul class="br-sideleft-menu">
         <li class="br-menu-item">
-          <a href="<?= base_url('dashboard/operator');?>" class="br-menu-link <?= (($this->uri->segment(1) == 'dashboard' ? 'active' : ''))?>">
+          <a href="<?= base_url('dashboard2');?>" class="br-menu-link <?= (($this->uri->segment(1) == 'dashboard2' ? 'active' : ''))?>">
             <i class="menu-item-icon icon ion-ios-home-outline tx-24"></i>
             <span class="menu-item-label">Dashboard</span>
           </a><!-- br-menu-link -->

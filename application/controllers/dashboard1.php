@@ -7,9 +7,13 @@ class Dashboard1 extends CI_Controller {
         parent::__construct();
         $this->load->helper("Response_Helper");
         $this->load->helper('url');
+        $this->load->library('session');
         $this->load->helper("Input_helper");
         if(!isset($_SESSION['email'])){
             redirect('app');
+        }
+        if ($_SESSION['level'] != 2) {
+            redirect('dashboard1');
         }
         
     }

@@ -12,7 +12,9 @@ class Dashboard2 extends CI_Controller {
         if(!isset($_SESSION['email'])){
             redirect('app');
         }
-        
+        if ($_SESSION['level'] != 3) {
+            redirect('dashboard2');
+        }
     }
 
 	public function index()

@@ -47,11 +47,10 @@ class mServis extends CI_Model{
         $kd = "";
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $k){
-                $tmp = ((int)$k->kode)+1;
-                $kd = sprintf("%03s", $tmp);
+                $kd = random_string('alnum', 3);
             }
         } else {
-            $kd = "001";
+            $kd = random_string('alnum', 3);
         }
         $kode = "KP".$kd;
         $data = array(
@@ -65,11 +64,10 @@ class mServis extends CI_Model{
         $kd = "";
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $k){
-                $tmp = ((int)$k->kode)+1;
-                $kd = sprintf("%02s", $tmp);
+                $kd = random_string('alnum', 2);
             }
         } else {
-            $kd = "01";
+            $kd =  random_string('alnum', 2);
         }
         $kode = "BR".date('dm').$kd;
         $data = array(
@@ -83,11 +81,10 @@ class mServis extends CI_Model{
         $kd = "";
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $k){
-                $tmp = ((int)$k->kode)+1;
-                $kd = sprintf("%02s", $tmp);
+                $kd = random_string('alnum', 2);
             }
         } else {
-            $kd = "01";
+            $kd = random_string('alnum', 2);
         }
         $kode = "SP".$kd;
         $data = array(
@@ -110,8 +107,8 @@ class mServis extends CI_Model{
 
     public function deleteData($kode)
     {
-        $this->db->where('kd_user', $kode);
-        $this->db->delete('teknisi');
+        $this->db->where('kd_transaksi', $kode);
+        $this->db->delete('transaksi_servis');
         return true;
     }
 
