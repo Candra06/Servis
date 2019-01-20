@@ -104,12 +104,12 @@ class Servis extends CI_Controller {
 
     public function delete($kode){
         try{
-            $this->mTeknisi->deleteData($kode);
+            $this->mServis->deleteData($kode);
             $this->session->set_flashdata("message", ['success', 'Berhasil hapus data '.$this->uri->segment(1)]);
-            redirect(base_url("teknisi"));
+            redirect(base_url("servis"));
         }catch(Exceptio $e){
             $this->session->set_flashdata("message", ['danger', 'Gagal input data '.$this->uri->segment(1)]);
-            redirect(base_url("teknisi"));
+            redirect(base_url("servis"));
         }
     }
 

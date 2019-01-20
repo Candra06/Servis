@@ -93,18 +93,6 @@ class mServis extends CI_Model{
         return $kode;
     }
 
-    public function cek_pelanggan(){
-
-    }
-
-    public function insert($array){
-        $this->db->insert("user", $array);
-    }
-
-    public function updateData($array, $kode){
-        $this->db->update("user", $array, ['kd_user' => $kode]);
-    }
-
     public function deleteData($kode)
     {
         $this->db->where('kd_transaksi', $kode);
@@ -227,12 +215,12 @@ class mServis extends CI_Model{
         $hapusDetail = $this->db->query("DELETE FROM detail_servis WHERE id_detail='$detail'");
         
 
-        // $data = array();
-        // if ( $hapusDetail){
-        //     $data = ['respons' => 'berhasil hapus'];
-        // }else{
-        //     $data = ['respons' => 'gagal hapus'];
-        // }
+        $data = array();
+        if ( $hapusDetail){
+            $data = ['respons' => 'berhasil hapus'];
+        }else{
+            $data = ['respons' => 'gagal hapus'];
+        }
         return $hapusBarang;
     }
 }
