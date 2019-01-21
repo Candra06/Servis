@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2019 at 10:08 AM
+-- Generation Time: Jan 21, 2019 at 10:12 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -31,19 +31,26 @@ SET time_zone = "+00:00";
 CREATE TABLE `barang_servis` (
   `kd_barang` varchar(8) NOT NULL,
   `merk` varchar(10) NOT NULL,
-  `type` varchar(10) NOT NULL,
+  `type` varchar(25) NOT NULL,
   `kd_pelanggan` varchar(5) NOT NULL,
   `jenis` varchar(10) NOT NULL,
   `kd_spec` varchar(4) NOT NULL,
-  `nomor_seri` varchar(25) NOT NULL,
   `problem` text NOT NULL,
   `kondisi` text NOT NULL,
   `progres` varchar(20) NOT NULL,
+  `kelengkapan` text NOT NULL,
   `create_by` varchar(4) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `modified_by` varchar(4) NOT NULL,
   `modified_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barang_servis`
+--
+
+INSERT INTO `barang_servis` (`kd_barang`, `merk`, `type`, `kd_pelanggan`, `jenis`, `kd_spec`, `problem`, `kondisi`, `progres`, `kelengkapan`, `create_by`, `create_at`, `modified_by`, `modified_at`) VALUES
+('BR2101G5', 'ASUS', 'ROG', 'KP001', '1', 'SPlu', 'Overload', 'Normal', '0', 'Tas chager', 'KU02', '2019-01-21 07:18:00', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -54,7 +61,7 @@ CREATE TABLE `barang_servis` (
 CREATE TABLE `detail_servis` (
   `id_detail` int(4) NOT NULL,
   `kd_transaksi` varchar(12) NOT NULL,
-  `kd_barang` varchar(6) NOT NULL,
+  `kd_barang` varchar(8) NOT NULL,
   `tgl_terima` date NOT NULL,
   `tgl_selesai` date NOT NULL,
   `kerusakan` varchar(50) NOT NULL,
@@ -65,22 +72,25 @@ CREATE TABLE `detail_servis` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `detail_servis`
+--
+
+INSERT INTO `detail_servis` (`id_detail`, `kd_transaksi`, `kd_barang`, `tgl_terima`, `tgl_selesai`, `kerusakan`, `created_by`, `created_at`, `modified_by`, `modified_at`, `status`) VALUES
+(1, 'TS2101190001', 'BR2101G5', '2019-01-21', '0000-00-00', 'Overload', 'KU02', '2019-01-21 07:18:00', '', '0000-00-00 00:00:00', 0);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelengkapan`
+-- Table structure for table `notifikasi`
 --
 
-CREATE TABLE `kelengkapan` (
-  `kd_kelengkapan` varchar(6) NOT NULL,
-  `kd_barang` varchar(6) NOT NULL,
-  `tas` varchar(25) NOT NULL,
-  `charger` varchar(25) NOT NULL,
-  `keterangan` varchar(75) NOT NULL,
-  `created_by` varchar(4) NOT NULL,
-  `created_date` datetime NOT NULL,
-  `edited_by` varchar(4) NOT NULL,
-  `edited_date` datetime NOT NULL
+CREATE TABLE `notifikasi` (
+  `id_notif` int(4) NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `kd_pelanggan` int(5) NOT NULL,
+  `kd_barang` int(8) NOT NULL,
+  `teks` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -95,6 +105,7 @@ CREATE TABLE `pelanggan` (
   `alamat` varchar(50) NOT NULL,
   `no_hp` varchar(13) NOT NULL,
   `pekerjaan` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
   `create_by` varchar(4) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `modified_by` varchar(4) NOT NULL,
@@ -105,8 +116,8 @@ CREATE TABLE `pelanggan` (
 -- Dumping data for table `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`kd_pelanggan`, `nama`, `alamat`, `no_hp`, `pekerjaan`, `create_by`, `create_date`, `modified_by`, `modified_date`) VALUES
-('KP001', 'Fahmi', 'Badean', '0897762245', 'Programmer', '1', '2019-01-01 01:43:22', '1', '2018-12-31 19:43:22');
+INSERT INTO `pelanggan` (`kd_pelanggan`, `nama`, `alamat`, `no_hp`, `pekerjaan`, `password`, `create_by`, `create_date`, `modified_by`, `modified_date`) VALUES
+('KP001', 'Fahmi', 'Badean', '0897762245', 'Programmer', '', 'KU02', '2019-01-14 03:29:53', '1', '2018-12-31 19:43:22');
 
 -- --------------------------------------------------------
 
@@ -122,6 +133,13 @@ CREATE TABLE `spec` (
   `prosesor` varchar(15) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `spec`
+--
+
+INSERT INTO `spec` (`kd_spec`, `ram`, `vga`, `hdd`, `prosesor`, `keterangan`) VALUES
+('SPlu', '4gb DDR4', 'NVDIA GTX geforce 4g', '500gb', 'corei7', 'Install ulang');
 
 -- --------------------------------------------------------
 
@@ -153,17 +171,6 @@ CREATE TABLE `transaksi_servis` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `transaksi_servis`
---
-
-INSERT INTO `transaksi_servis` (`kd_transaksi`, `tgl_transaksi`, `kd_pelanggan`, `created_by`, `date_created`, `status`) VALUES
-('TS0401190001', '2019-01-04', 'KP001', 'KT01', '2019-01-04 00:00:00', 0),
-('TS0401190002', '2019-01-04', 'KP001', 'KT01', '2019-01-04 00:00:00', 0),
-('TS0401190003', '2019-01-04', 'KP001', 'KT01', '2019-01-04 08:50:25', 0),
-('TS0401190004', '2019-01-04', 'KP001', 'KT01', '2019-01-04 08:53:39', 0),
-('TS0401190005', '2019-01-04', 'KP001', 'KT01', '2019-01-04 08:56:39', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -176,7 +183,7 @@ CREATE TABLE `user` (
   `no_hp` varchar(13) NOT NULL,
   `level` tinyint(1) NOT NULL,
   `email` varchar(20) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `alamat` varchar(45) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `create_by` varchar(4) NOT NULL,
@@ -191,7 +198,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`kd_user`, `nama`, `no_hp`, `level`, `email`, `password`, `alamat`, `status`, `create_by`, `create_date`, `modified_by`, `modified_date`, `last_login`) VALUES
-('KU01', 'Marcow', '0898876456', 3, 'sugiono@mail.com', '12345', 'Medan', 1, '1', '2019-01-01 01:41:00', '1', '2018-12-31 19:41:00', '0000-00-00');
+('KU01', 'Marcow Pollo', '0898876456', 2, 'sugiono@mail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'Medan', 1, 'KU01', '2019-01-10 18:39:41', '1', '2019-01-08 21:31:31', '0000-00-00'),
+('KU02', 'Andrean Three', '082229411164', 3, 'andrean@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Tamansari Jaya', 1, 'KU01', '2019-01-11 03:32:09', 'KU02', '2019-01-10 21:32:09', '0000-00-00');
 
 --
 -- Indexes for dumped tables
@@ -211,16 +219,14 @@ ALTER TABLE `barang_servis`
 --
 ALTER TABLE `detail_servis`
   ADD PRIMARY KEY (`id_detail`),
-  ADD UNIQUE KEY `detail_transaksi` (`kd_transaksi`);
+  ADD KEY `user` (`created_by`),
+  ADD KEY `detail_servis_ibfk_2` (`kd_barang`);
 
 --
--- Indexes for table `kelengkapan`
+-- Indexes for table `notifikasi`
 --
-ALTER TABLE `kelengkapan`
-  ADD PRIMARY KEY (`kd_kelengkapan`),
-  ADD KEY `barang` (`kd_barang`),
-  ADD KEY `created` (`created_by`),
-  ADD KEY `edited` (`edited_by`);
+ALTER TABLE `notifikasi`
+  ADD PRIMARY KEY (`id_notif`);
 
 --
 -- Indexes for table `pelanggan`
@@ -266,41 +272,10 @@ ALTER TABLE `detail_servis`
   MODIFY `id_detail` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `notifikasi`
 --
-
---
--- Constraints for table `barang_servis`
---
-ALTER TABLE `barang_servis`
-  ADD CONSTRAINT `barang_servis_ibfk_1` FOREIGN KEY (`kd_pelanggan`) REFERENCES `pelanggan` (`kd_pelanggan`),
-  ADD CONSTRAINT `spesifikasi_barang` FOREIGN KEY (`kd_spec`) REFERENCES `spec` (`kd_spec`);
-
---
--- Constraints for table `detail_servis`
---
-ALTER TABLE `detail_servis`
-  ADD CONSTRAINT `detail_servis_ibfk_1` FOREIGN KEY (`kd_transaksi`) REFERENCES `transaksi_servis` (`kd_transaksi`);
-
---
--- Constraints for table `kelengkapan`
---
-ALTER TABLE `kelengkapan`
-  ADD CONSTRAINT `kelengkapan_ibfk_1` FOREIGN KEY (`kd_barang`) REFERENCES `barang_servis` (`kd_barang`),
-  ADD CONSTRAINT `kelengkapan_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `user` (`kd_user`),
-  ADD CONSTRAINT `kelengkapan_ibfk_3` FOREIGN KEY (`edited_by`) REFERENCES `user` (`kd_user`);
-
---
--- Constraints for table `tb_keuangan`
---
-ALTER TABLE `tb_keuangan`
-  ADD CONSTRAINT `tb_keuangan_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`kd_user`);
-
---
--- Constraints for table `transaksi_servis`
---
-ALTER TABLE `transaksi_servis`
-  ADD CONSTRAINT `transaksi_servis_ibfk_4` FOREIGN KEY (`kd_pelanggan`) REFERENCES `pelanggan` (`kd_pelanggan`);
+ALTER TABLE `notifikasi`
+  MODIFY `id_notif` int(4) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -189,7 +189,9 @@
                                   '<td>'+data[i].jenis_barang+'</td>'+
                                   '<td>'+data[i].nama+'</td>'+
                                   '<td>'+data[i].problem+'</td>'+
-                                  y +
+                                  '<td>'+
+                                    // '<button type="button" class="btn btn-primary mg-r-5 mg-b-10" onclick="java_script_:hapus('+data[i].id_detail+','+barang+','+data[i].merk+','+data[i].type+','+data[i].problem+','++','++','++','+)"><div><i class="fa fa-pencil-alt"></i></div></button>'+' '+
+                                    '<button type="button" class="btn btn-danger mg-r-5 mg-b-10" onclick="java_script_:hapus('+data[i].id_detail+','+barang+')"><div><i class="fa fa-trash"></i></div></button></td>'+
                                 '</tr>';
                                 no++;
                       }

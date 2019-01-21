@@ -14,9 +14,11 @@ class mBarang extends CI_Model{
         return $ada;
     }
 
-   
+    public function progres_Cek($array, $kode){
+        $this->db->update("barang_servis", $array, ['kd_barang' => $kode]);
+    }
 
-    public function insert($array){
+    public function insert($kode){
         $this->db->insert("user", $array);
     }
 

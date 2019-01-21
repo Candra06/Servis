@@ -30,18 +30,6 @@ class Barang extends CI_Controller {
         $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
 		$this->load->view('teknisi/index',$data);		
     }
-    
-    public function add()
-    {
-        $data['kode_pelanggan'] = $this->mPelanggan->kode();
-        $data['data'] = null;
-        $data['title'] = "Prima Comp";
-        $data['header'] = "Data Pelanggan";
-        $data['content'] = "pelanggan/add";
-        $data['head'] = "Edit Profil";
-        $data['data1'] = $this->db->get_where("user", ['kd_user' => $_SESSION['kd']])->row_array();
-		$this->load->view('backend/index',$data); 
-    }
 
     public function input(){
         $p = $_POST;
@@ -75,35 +63,64 @@ class Barang extends CI_Controller {
 		$this->load->view('backend/index',$data);
     }
 
-    public function update($kode){
-        $p = $_POST;
-        $date = date('Y-m-d H:i:s');
-        try{
-            $array = [
-                'nama' => $p['nama'],
-                'alamat' => $p['alamat'],
-                'no_hp' => $p['no_hp'],
-                'pekerjaan' => $p['pekerjaan'],
-                'modified_by' => 1,
-                'modified_date' => $date
-            ];
-            $this->mPelanggan->updateData($array, $kode);
-            $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
-        }catch(Exception $e){
+    public function progresCek($kode){
+       $p = $_POST;
+
+       try{
+           $date = date('Y-m-d H:i:s');
+           $array = [
+                'modified_at' => $date,
+                'modified_by' => $_SESSION['kd'],
+                'progres' => 1
+           ];
+           $this->mBarang->progres_Cek($array,$kode);
+           $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
+           redirect(base_url("barang"));
+        }catch (Exception $e){
             $this->session->set_flashdata("message", ['danger', 'Gagal update data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
+            redirect(base_url("barang"));
         }
     }
 
-    public function delete($kode){
+    public function progresPerbaikan($kode){
+        $p = $_POST;
+
         try{
-            $this->mPelanggan->deleteData($kode);
-            $this->session->set_flashdata("message", ['success', 'Berhasil hapus data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
-        }catch(Exceptio $e){
-            $this->session->set_flashdata("message", ['danger', 'Gagal input data '.$this->uri->segment(1)]);
-            redirect(base_url("pelanggan"));
+           $date = date('Y-m-d H:i:s');
+           $array = [
+                'modified_by' => $date,
+                'modified_by' => $_SESSION['kd'],
+                'progres' => 2
+           ];
+           $this->mBarang->progres_Cek($array,$kode);
+           $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
+           redirect(base_url("barang"));
+        }catch (Exception $e){
+            $this->session->set_flashdata("message", ['danger', 'Gagal update data '.$this->uri->segment(1)]);
+            redirect(base_url("barang"));
+       }
+    }
+
+    public function progresSelesai($kode){
+        $p = $_POST;
+
+        try{
+           $date = date('Y-m-d H:i:s');
+           $array = [
+                'modified_by' => $date,
+                'modified_by' => $_SESSION['kd'],
+                'progres' => 4
+           ];
+           $this->mBarang->progres_Cek($array,$kode);
+           $this->session->set_flashdata("message", ['success', 'Berhasil update data '.$this->uri->segment(1)]);
+           redirect(base_url("barang"));
+        }catch (Exception $e){
+            $this->session->set_flashdata("message", ['danger', 'Gagal update data '.$this->uri->segment(1)]);
+            redirect(base_url("barang"));
         }
+    }
+
+    public function gantiSparepart($kode){
+        
     }
 }

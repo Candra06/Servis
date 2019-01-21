@@ -15,7 +15,7 @@ class Servis extends CI_Controller {
             $this->update($this->uri->segment(3));
         }
 
-        if(!isset($_SESSION['email'])){
+        if(!isset($_SESSION['email'])){ 
             redirect('app');
         }
         
@@ -140,12 +140,15 @@ class Servis extends CI_Controller {
 
     public function tampilBarang(){
         $kdTransaksi = $this->mServis->kode();
-        $data = $this->db->query("SELECT bs.merk, bs.type, ds.id_detail, bs.jenis, bs.problem, pl.nama, ds.kd_barang,
+        $data = $this->db->query("SELECT bs.kd_barang, bs.merk, bs.type, bs.jenis, bs.problem, bs.kondisi, bs.kelengkapan, 
+                                    ds.kerusakan, pl.nama, pl.kd_pelanggan, 
+                                    sp.ram, sp.vga, sp.hdd, sp.prosesor, sp.keterangan,
                                     (CASE WHEN(bs.jenis = '1') THEN 'Laptop' ELSE 'PC' END) as jenis_barang 
-                                    FROM barang_servis bs, pelanggan pl, detail_servis ds
+                                    FROM barang_servis bs, pelanggan pl, detail_servis ds, spec sp
                                     WHERE ds.kd_transaksi = '$kdTransaksi'
                                     AND ds.kd_barang = bs.kd_barang
                                     AND bs.kd_pelanggan = pl.kd_pelanggan
+                                    AND bs.kd_spec = sp.kd_spec
                                     AND ds.status = '0'");
         echo json_encode($data->result());
     }

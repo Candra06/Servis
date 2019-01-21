@@ -26,8 +26,9 @@
               <thead>
                 <tr>
                   <th class="wd-10p">Kode Barang</th>
-                  <th class="wd-15p">Nama Pemilik</th>
                   <th class="wd-15p">Merk Barang</th>
+                  <th class="wd-10p">Kode Pelanggan</th>
+                  <th class="wd-15p">Nama Pemilik</th>
                   <th class="wd-15p">Progress</th>
                   <th class="wd-10p">Aksi</th>
                 </tr>
@@ -38,8 +39,9 @@
                 ?>
                 <tr>
                   <td><?= $d['kd_barang']?></td>
-                  <td><?= $d['nama']?></td>
                   <td><?= $d['merk'].' '.$d['type'];?></td>
+                  <td><?= $d['kd_pelanggan']?></td>
+                  <td><?= $d['nama']?></td>
                   <td><?= $d['progres']?></td>
                   <td>
                       <div class="btn-group">
@@ -47,10 +49,10 @@
                           Aksi
                         </button>
                         <div class="dropdown-menu">
-                          <a class="form-control dropdown-item form-control-dark" href="#">Checking</a>
-                          <a class="form-control dropdown-item form-control-dark" href="#">Perbaikan</a>
+                          <a class="form-control dropdown-item form-control-dark" href="<?= base_url().$this->uri->segment(1)."/progresCek/$d[kd_barang]"?>">Checking</a>
+                          <a class="form-control dropdown-item form-control-dark" href="<?= base_url().$this->uri->segment(1)."/progresPerbaikan/$d[kd_barang]"?>">Perbaikan</a>
                           <a class="form-control dropdown-item form-control-dark" href="#">Ganti Sparepart</a>
-                          <a class="form-control dropdown-item form-control-dark" href="#">Selesai</a>
+                          <a class="form-control dropdown-item form-control-dark" href="<?= base_url().$this->uri->segment(1)."/progresSelesai/$d[kd_barang]"?>">Selesai</a>
                         </div>
                       </div>
                   </td>
